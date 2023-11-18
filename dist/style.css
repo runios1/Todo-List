@@ -1,0 +1,136 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/* General */
+
+
+:root{
+    --cyan: #22d3ee;
+    --darkcyan: #06b6d4;
+    --darkercyan: #0891b2;
+    --lightgray: #f3f4f6;
+}
+
+body{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+/* Layout */
+
+
+body{
+    height: 100vh;
+    display: flex;
+}
+
+main{
+    overflow: scroll;
+    flex-grow: 1;
+}
+
+nav{
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Element Design */
+
+nav{
+    box-shadow: 1px 0px 5px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+main{
+    background-color: var(--lightgray);
+}
+
+#logo{
+    align-self: center;
+    font-size: 4.5rem;
+    color: var(--cyan);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#addTaskButton{
+    position: fixed;
+    bottom: 50px;
+    right: 70px;
+    border: none;
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    background-color: var(--cyan);
+    color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+#addTaskButton:hover{
+    background-color: var(--darkcyan);
+}
+
+#addTaskButton:active{
+    background-color: var(--darkercyan);
+}
+
+.sub-title{
+    margin-left: 20px;
+    font-family: arial;
+    font-size: 0.7rem;
+    color: gray;
+    font-weight: bold;
+    margin-top: 10px;
+}
