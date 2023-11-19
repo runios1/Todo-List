@@ -1,5 +1,5 @@
 class Project{
-    constructor(name,color){
+    constructor(name,color='red'){
         this.name = name;
         this.color = color;
         this.tasks = [];

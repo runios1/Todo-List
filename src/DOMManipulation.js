@@ -1,5 +1,6 @@
 import { Task } from "./task";
 import { Project } from "./project";
+import { addProject } from ".";
 
 const taskDialog = document.querySelector('dialog.task');
 const projectDialog = document.querySelector('dialog.project');
@@ -29,7 +30,8 @@ function getProjectDialogForm() {
     container.appendChild(form);
     const nameInput = form.querySelector('input[type="text"]');
     nameInput.addEventListener('focusout',() => {
-        form.submit();
+        const project = new Project(nameInput.value);
+        addProject(project);
         projectDialog.close();
     });
 }

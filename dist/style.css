@@ -52,10 +52,11 @@ table {
 
 
 :root{
-    --cyan: #22d3ee;
-    --darkcyan: #06b6d4;
-    --darkercyan: #0891b2;
+    --teal: #0D9488;
+    --hoverteal: #0f766e;
+    --pressedteal: #115e59;
     --lightgray: #f3f4f6;
+    --gray: #737373;
 }
 
 body{
@@ -103,7 +104,7 @@ form{
 #logo{
     align-self: center;
     font-size: 4.5rem;
-    color: var(--cyan);
+    color: var(--teal);
     text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -116,7 +117,7 @@ form{
     border-radius: 50px;
     height: 50px;
     width: 50px;
-    background-color: var(--cyan);
+    background-color: var(--teal);
     color: white;
     font-size: 1.4rem;
     font-weight: bold;
@@ -124,18 +125,18 @@ form{
 }
 
 #addTaskButton:hover{
-    background-color: var(--darkcyan);
+    background-color: var(--hoverteal);
 }
 
 #addTaskButton:active{
-    background-color: var(--darkercyan);
+    background-color: var(--pressedteal);
 }
 
 .sub-title{
     margin-left: 20px;
     font-family: arial;
     font-size: 0.7rem;
-    color: gray;
+    color: var(--gray);
     font-weight: bold;
     margin-top: 10px;
 }
@@ -151,7 +152,7 @@ form{
 }
 
 #addProjectButton:hover{
-    background-color: gray;
+    background-color: var(--gray);
 }
 
 #addProjectButton:active{
