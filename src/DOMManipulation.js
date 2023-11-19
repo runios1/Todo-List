@@ -7,7 +7,10 @@ newTaskButton.addEventListener('click',() => dialog.showModal());
 
 function getDialogForm(){
     const container = document.getElementById('formContainer');
+    const close = dialog.querySelector('button');
+    close.addEventListener('click',() => dialog.close());
     container.appendChild(Task.createForm());
+    
 }
 
 export {getDialogForm};
