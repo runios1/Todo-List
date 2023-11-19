@@ -139,3 +139,21 @@ form{
     font-weight: bold;
     margin-top: 10px;
 }
+
+#addProjectButton{
+    width: 100%;
+    align-self: center;
+    margin-top: 10px;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    background-color: darkgray;
+}
+
+#addProjectButton:hover{
+    background-color: gray;
+}
+
+#addProjectButton:active{
+    background-color: rgb(81, 81, 81);
+}

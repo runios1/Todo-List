@@ -1,5 +1,6 @@
-import { getDialogForm, newTaskButton } from "./DOMManipulation.js"
+import { getProjectDialogForm, getTaskDialogForm, newProjectButton, newTaskButton } from "./DOMManipulation.js"
 
 newTaskButton();
-getDialogForm();
-
+getTaskDialogForm();
+newProjectButton();
+getProjectDialogForm();
