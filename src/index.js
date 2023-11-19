@@ -1,14 +1,20 @@
-import { getProjectDialogForm, getTaskDialogForm, newProjectButton, newTaskButton } from "./DOMManipulation.js"
+import { getProjectDialogForm, getTaskDialogForm, newProjectButton, newTaskButton, displayProjects} from "./DOMManipulation.js"
 
-const projects = [];
+const projects = (function() {
+    const projectsArray = [];
+    const addProject = (project) => {
+        projectsArray.push(project);
+        displayProjects();
+    };
+    const getProjects = () => projectsArray;
+
+    return {addProject,getProjects};
+})();
 
 newTaskButton();
 getTaskDialogForm();
-newProjectButton();
 getProjectDialogForm();
+newProjectButton();
+displayProjects();
 
-function addProject(project) {
-    projects.push(project);
-}
-
-export { addProject }
+export { projects }

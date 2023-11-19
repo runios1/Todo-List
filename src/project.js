@@ -34,12 +34,7 @@ class Project{
         name.autofocus = true;
         form.appendChild(name);
 
-
         
-        const submit = document.createElement('button');
-        submit.textContent = "Submit";
-        submit.type = submit;
-        form.appendChild(submit);
         return form;
     }
 }

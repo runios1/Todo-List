@@ -84,6 +84,16 @@ nav{
     flex-direction: column;
 }
 
+#projects{
+    margin-left: 20px;
+}
+
+#projects>div{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
 
 /* Element Design */
 
@@ -98,6 +108,10 @@ main{
 
 form{
     display: flex;
+    align-items: center;
+}
+
+form.task{
     flex-direction: column;
 }
 
@@ -133,12 +147,12 @@ form{
 }
 
 .sub-title{
-    margin-left: 20px;
     font-family: arial;
     font-size: 0.7rem;
     color: var(--gray);
     font-weight: bold;
     margin-top: 10px;
+    margin-left: 10px;
 }
 
 #addProjectButton{
@@ -157,4 +171,30 @@ form{
 
 #addProjectButton:active{
     background-color: rgb(81, 81, 81);
+}
+
+.colorPicker{
+    background-color: red;
+    height: 12px;
+    width: 12px;
+    border-radius: 100px;
+    border: 2px solid white;
+    outline: gray solid 1.5px;
+    margin-right: 5px;
+}
+
+dialog.project{
+    position: relative;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.project select{
+    background-color: red;
+    height: 12px;
+    width: 12px;
+    border-radius: 100px;
+    border: 2px solid white;
+    outline: gray solid 1.5px;
 }

@@ -1,6 +1,6 @@
 import { Task } from "./task";
 import { Project } from "./project";
-import { addProject } from ".";
+import { projects } from "./index";
 
 const taskDialog = document.querySelector('dialog.task');
 const projectDialog = document.querySelector('dialog.project');
@@ -19,8 +19,10 @@ function getTaskDialogForm() {
 
 function newProjectButton() {
     const addProjectButton = document.getElementById('addProjectButton');
+    const nameInput = projectDialog.querySelector('input[type="text"]');
     addProjectButton.addEventListener('click',() => {
-        projectDialog.showModal();
+        projectDialog.show();
+        nameInput.value = '';
     });
 }
 
@@ -30,11 +32,31 @@ function getProjectDialogForm() {
     container.appendChild(form);
     const nameInput = form.querySelector('input[type="text"]');
     nameInput.addEventListener('focusout',() => {
-        const project = new Project(nameInput.value);
-        addProject(project);
-        projectDialog.close();
+        if(nameInput.value !== ''){
+            const project = new Project(nameInput.value);
+            projects.addProject(project);
+        }
+        // projectDialog.close();
     });
 }
 
+function displayProjects() {
+    const container = document.getElementById('projects');
+    container.innerHTML = '';
+    for(let project of projects.getProjects()){
+        const projectElement = document.createElement('div');
+        
+        const color = document.createElement('div');
+        color.className = "colorPicker";
+        projectElement.appendChild(color);
 
-export {newTaskButton,getTaskDialogForm,newProjectButton,getProjectDialogForm};
+        const name = document.createElement('span');
+        name.textContent = project.name;
+        projectElement.appendChild(name);
+
+        container.appendChild(projectElement);
+    }
+}
+
+
+export {newTaskButton,getTaskDialogForm,newProjectButton,getProjectDialogForm,displayProjects};
