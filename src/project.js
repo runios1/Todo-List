@@ -13,20 +13,9 @@ class Project{
         const form = document.createElement('form');
         form.method = "dialog";
 
-        const colorPicker = document.createElement('select');
+        const colorPicker = document.createElement('button');
+        colorPicker.className = "colorPicker";
         form.appendChild(colorPicker);
-
-        const redOption = document.createElement('option');
-        redOption.value = 'red';
-        redOption.textContent = 'Red';
-        redOption.selected = 'selected';
-        colorPicker.appendChild(redOption);
-
-        const greenOption = document.createElement('option');
-        greenOption.value = 'green';
-        greenOption.textContent = 'Green';
-        colorPicker.appendChild(greenOption);
-
 
         const name = document.createElement('input');
         name.type = 'text';

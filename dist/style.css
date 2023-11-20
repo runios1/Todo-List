@@ -63,6 +63,11 @@ body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+dialog{
+    margin: 0px;
+    padding: 0px;
+}
+
 
 /* Layout */
 
@@ -84,7 +89,7 @@ nav{
     flex-direction: column;
 }
 
-#projects{
+#projects, dialog.project{
     margin-left: 20px;
 }
 
@@ -120,7 +125,8 @@ form.task{
     font-size: 4.5rem;
     color: var(--teal);
     text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+    font-weight: bold;
 }
 
 #addTaskButton{
@@ -186,15 +192,9 @@ form.task{
 dialog.project{
     position: relative;
     border: none;
-    padding: 0px;
-    margin: 0px;
 }
 
-.project select{
-    background-color: red;
-    height: 12px;
-    width: 12px;
-    border-radius: 100px;
-    border: 2px solid white;
-    outline: gray solid 1.5px;
+.colorContainer{
+    display: flex;
+    align-items: center;
 }

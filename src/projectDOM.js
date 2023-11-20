@@ -1,21 +1,8 @@
-import { Task } from "./task";
 import { Project } from "./project";
 import { projects } from "./index";
+import { colorPickerClickHandler } from "./colorPickerDOM";
 
-const taskDialog = document.querySelector('dialog.task');
 const projectDialog = document.querySelector('dialog.project');
-
-function newTaskButton() {
-    const addTaskButton = document.getElementById('addTaskButton');
-    addTaskButton.addEventListener('click',() => taskDialog.showModal());
-}
-
-function getTaskDialogForm() {
-    const container = taskDialog.querySelector('.formContainer');
-    const close = taskDialog.querySelector('button');
-    close.addEventListener('click',() => taskDialog.close());
-    container.appendChild(Task.createForm());
-}
 
 function newProjectButton() {
     const addProjectButton = document.getElementById('addProjectButton');
@@ -36,7 +23,7 @@ function getProjectDialogForm() {
             const project = new Project(nameInput.value);
             projects.addProject(project);
         }
-        // projectDialog.close();
+        projectDialog.close();
     });
 }
 
@@ -46,8 +33,10 @@ function displayProjects() {
     for(let project of projects.getProjects()){
         const projectElement = document.createElement('div');
         
-        const color = document.createElement('div');
+        const color = document.createElement('button');
         color.className = "colorPicker";
+        color.addEventListener('click',(event) => colorPickerClickHandler(event,project));
+        color.style.backgroundColor = project.color;
         projectElement.appendChild(color);
 
         const name = document.createElement('span');
@@ -59,4 +48,4 @@ function displayProjects() {
 }
 
 
-export {newTaskButton,getTaskDialogForm,newProjectButton,getProjectDialogForm,displayProjects};
+export {newProjectButton,getProjectDialogForm,displayProjects};

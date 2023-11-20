@@ -1,4 +1,5 @@
-import { getProjectDialogForm, getTaskDialogForm, newProjectButton, newTaskButton, displayProjects} from "./DOMManipulation.js"
+import { getProjectDialogForm, newProjectButton, displayProjects} from "./projectDOM.js"
+import { newTaskButton,getTaskDialogForm } from "./taskDOM.js";
 
 const projects = (function() {
     const projectsArray = [];

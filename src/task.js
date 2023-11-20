@@ -66,28 +66,6 @@ class Task {
     get priority(){
         return this._priority.value;
     }
-
-    static createForm() {
-        const form = document.createElement('form');
-        form.method = "dialog";
-
-        const task = new Task();
-        const properties = Object.keys(task);
-
-        properties.forEach(property => {
-            const label = document.createElement('label');
-            label.for = task[property].name;
-            label.textContent = `${task[property].name}: `;
-            form.appendChild(label);
-            const input = task[property].formQuery();
-            form.appendChild(input);
-        });
-        const submit = document.createElement('button');
-        submit.textContent = "Submit";
-        submit.type = submit;
-        form.appendChild(submit);
-        return form;
-    }
 }
 
 export {Task};
