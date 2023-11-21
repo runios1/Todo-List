@@ -90,16 +90,20 @@ nav{
     flex-direction: column;
 }
 
-dialog.project{
-    margin-left: 20px;
+#projects>div, dialog.project{
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+dialog.project input{
+    border: none;
+    padding: 0;
 }
 
 #projects>div{
     display: flex;
     align-items: center;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 
