@@ -57,6 +57,7 @@ table {
     --pressedteal: #115e59;
     --lightgray: #f3f4f6;
     --gray: #737373;
+    --grayPressed: rgb(81, 81, 81); 
 }
 
 body{
@@ -89,14 +90,16 @@ nav{
     flex-direction: column;
 }
 
-#projects, dialog.project{
+dialog.project{
     margin-left: 20px;
 }
 
 #projects>div{
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 
@@ -157,14 +160,12 @@ form.task{
     font-size: 0.7rem;
     color: var(--gray);
     font-weight: bold;
-    margin-top: 10px;
-    margin-left: 10px;
+    margin: 10px;
 }
 
 #addProjectButton{
     width: 100%;
     align-self: center;
-    margin-top: 10px;
     border: none;
     color: white;
     font-size: 1.5rem;
@@ -176,7 +177,7 @@ form.task{
 }
 
 #addProjectButton:active{
-    background-color: rgb(81, 81, 81);
+    background-color: var(--grayPressed);
 }
 
 .colorPicker{
@@ -197,4 +198,12 @@ dialog.project{
 .colorContainer{
     display: flex;
     align-items: center;
+}
+
+#projects > div:hover , #projects > div.selected{
+    background-color: darkgray;
+}
+
+#projects > div.selected:hover{
+    background-color: gray;
 }

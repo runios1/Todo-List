@@ -12,10 +12,22 @@ const projects = (function() {
     return {addProject,getProjects};
 })();
 
+let selectedProject = null;
+
+function selectProject(project) {
+    selectedProject = project;
+    console.log(`Project ${project.name} is selected!`);
+}
+
+function deselectProject(){
+    selectedProject = null;
+    console.log(`selectedProject now null!`);
+}
+
 newTaskButton();
 getTaskDialogForm();
 getProjectDialogForm();
 newProjectButton();
 displayProjects();
 
-export { projects }
+export { projects, selectProject, deselectProject }
