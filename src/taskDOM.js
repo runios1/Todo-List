@@ -32,7 +32,8 @@ function createForm() {
     });
     const submit = document.createElement('button');
     submit.textContent = "Submit";
-    submit.type = submit;
+    submit.type = "submit";
+    submit.className = "coloredButton";
     form.appendChild(submit);
     return form;
 }
