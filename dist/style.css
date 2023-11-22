@@ -286,3 +286,8 @@ button#close{
     font-weight: bold;
     font-size: 0.75rem;
 }
+
+textarea{
+    width: 500px;
+    resize: vertical;
+}

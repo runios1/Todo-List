@@ -10,9 +10,6 @@ function taskFormStartup(){
 
 function newTaskButton() {
     const addTaskButton = document.getElementById('addTaskButton');
-    taskDialog.addEventListener('click', (event) => {
-        dialogBackdropClickHandler(event);
-    });
     addTaskButton.addEventListener('click',() => {
         taskDialog.showModal();
     });
@@ -33,14 +30,17 @@ function createForm() {
     const task = new Task();
     const properties = Object.keys(task);
 
+    const formDOMElements = [];
+
     properties.forEach(property => {
-        if(task[property].name === "description") return;
+        if(task[property].inputType === "N/A") return;
         const label = document.createElement('label');
         label.for = task[property].name;
         label.textContent = `${capitalize(task[property].name)}: `;
         form.appendChild(label);
         const input = task[property].formQuery();
         form.appendChild(input);
+        formDOMElements.push(input);
     });
 
     const descriptionLabel = document.createElement('label');
@@ -50,6 +50,7 @@ function createForm() {
     const description = document.createElement('textarea');
     description.name = 'description';
     form.appendChild(description);
+    formDOMElements.push(description)
 
 
     
@@ -59,20 +60,32 @@ function createForm() {
     submit.className = "coloredButton";
     submit.autofocus = true;
     form.appendChild(submit);
+    formDOMElements.push(submit);
 
     form.addEventListener('submit',() => 
     {
         selectedProject ? selectedProject.addTask(task) : noSelectedProjectHandler()
     });
 
+    taskDialog.addEventListener('click', (event) => {
+        dialogBackdropClickHandler(event,formDOMElements);
+    });
+
     return form;
 }
 
-function dialogBackdropClickHandler(event){ //Close dialog when click is outside dialog box
+function dialogBackdropClickHandler(event, formDOMElements){ //Close dialog when click is outside dialog box
     const rect = taskDialog.getBoundingClientRect();
     const isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
         rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
-    if (!isInDialog) {
+    
+    let isInteractingWithForm = false;
+    for(const element of formDOMElements){
+        if(isInteractingWithForm) break;
+        isInteractingWithForm = document.activeElement === element;
+    }
+
+    if (!isInDialog && !isInteractingWithForm) {
         taskDialog.close();
     }
 }
