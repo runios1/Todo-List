@@ -17,6 +17,7 @@ function getTaskDialogForm() {
 function createForm() {
     const form = document.createElement('form');
     form.method = "dialog";
+    form.className = "task";
 
     const task = new Task();
     const properties = Object.keys(task);

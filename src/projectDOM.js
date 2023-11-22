@@ -5,6 +5,25 @@ import { colorPickerClickHandler } from "./colorPickerDOM";
 const projectDialog = document.querySelector('dialog.project');
 let selectedProjectDOMElement = null;
 
+function createForm(){
+    const form = document.createElement('form');
+    form.method = "dialog";
+    form.className = "project"
+
+    const colorPicker = document.createElement('button');
+    colorPicker.className = "colorPicker";
+    form.appendChild(colorPicker);
+
+    const name = document.createElement('input');
+    name.type = 'text';
+    name.placeholder = 'Name';
+    name.autofocus = true;
+    form.appendChild(name);
+
+    
+    return form;
+}
+
 function newProjectButton() {
     const addProjectButton = document.getElementById('addProjectButton');
     const nameInput = projectDialog.querySelector('input[type="text"]');
@@ -16,7 +35,7 @@ function newProjectButton() {
 
 function getProjectDialogForm() {
     const container = projectDialog.querySelector('.formContainer');
-    const form = Project.createForm();
+    const form = createForm();
     container.appendChild(form);
     const nameInput = form.querySelector('input[type="text"]');
     nameInput.addEventListener('focusout',() => {

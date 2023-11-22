@@ -64,11 +64,6 @@ body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-dialog{
-    margin: 0px;
-    padding: 0px;
-}
-
 
 /* Layout */
 
@@ -81,7 +76,10 @@ body{
 
 form{
     display: flex;
-    align-items: center;
+}
+
+.flexContainer{
+    display: flex;
 }
 
     /* main */
@@ -106,6 +104,11 @@ nav{
     flex-direction: column;
 }
 
+dialog.project{
+    margin: 0px;
+    padding: 0px;
+}
+
 #projects>div, dialog.project{
     padding-left: 20px;
     padding-top: 10px;
@@ -120,6 +123,19 @@ nav{
 #projects{
     overflow: scroll;
 }
+
+form.project{
+    align-items: center;
+}
+
+.flexContainer.task{
+    flex-direction: column;
+}
+
+.flexContainer.task>button{
+    margin-left: auto;
+}
+
 
 /* Element Design */
 
@@ -230,6 +246,7 @@ dialog.project input{
     background-color: white;
     box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
     border-radius: 10px;
+    border: none;
 }
 
 main>div.card{
