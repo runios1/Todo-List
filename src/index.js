@@ -1,5 +1,5 @@
-import { getProjectDialogForm, newProjectButton, displayProjects} from "./projectDOM.js"
-import { newTaskButton,getTaskDialogForm } from "./taskFormDOM.js";
+import { projectStartup } from "./projectDOM.js"
+import { taskFormStartup } from "./taskFormDOM.js";
 
 const projects = (function() {
     const projectsArray = [];
@@ -28,10 +28,7 @@ function capitalize(string){
     return string[0].toUpperCase() + string.slice(1);
 }
 
-newTaskButton();
-getTaskDialogForm();
-getProjectDialogForm();
-newProjectButton();
-displayProjects();
+taskFormStartup();
+projectStartup();
 
-export { projects, selectProject, deselectProject, capitalize }
+export { projects, selectProject, deselectProject, capitalize, selectedProject }

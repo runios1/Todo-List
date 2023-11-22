@@ -5,6 +5,14 @@ import { colorPickerClickHandler } from "./colorPickerDOM";
 const projectDialog = document.querySelector('dialog.project');
 let selectedProjectDOMElement = null;
 
+
+function projectStartup(){
+    getProjectDialogForm();
+    newProjectButton();
+    displayProjects();
+}
+
+
 function createForm(){
     const form = document.createElement('form');
     form.method = "dialog";
@@ -79,4 +87,4 @@ function displayProjects() {
 }
 
 
-export {newProjectButton,getProjectDialogForm,displayProjects};
+export { projectStartup };

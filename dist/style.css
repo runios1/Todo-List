@@ -95,7 +95,7 @@ form.task{
     flex-direction: column;
 }
 
-form.task input{
+form.task input, textarea{
     margin-bottom: 10px;
 }
 
