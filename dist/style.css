@@ -271,17 +271,18 @@ dialog.task button{
     border: none;
     background-color: var(--teal);
     color: white;
-    height: 20px;
 }
 
 dialog.task button[type="submit"]{
     width: 70px;
+    height: 25px;
     align-self: center;
     font-weight: bold;
 }
 
 button#close{
     width: 20px;
+    height: 20px;
     font-weight: bold;
     font-size: 0.75rem;
 }

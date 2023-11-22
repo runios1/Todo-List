@@ -1,5 +1,5 @@
 import { getProjectDialogForm, newProjectButton, displayProjects} from "./projectDOM.js"
-import { newTaskButton,getTaskDialogForm } from "./taskDOM.js";
+import { newTaskButton,getTaskDialogForm } from "./taskFormDOM.js";
 
 const projects = (function() {
     const projectsArray = [];
@@ -24,10 +24,14 @@ function deselectProject(){
     console.log(`selectedProject now null!`);
 }
 
+function capitalize(string){
+    return string[0].toUpperCase() + string.slice(1);
+}
+
 newTaskButton();
 getTaskDialogForm();
 getProjectDialogForm();
 newProjectButton();
 displayProjects();
 
-export { projects, selectProject, deselectProject }
+export { projects, selectProject, deselectProject, capitalize }
