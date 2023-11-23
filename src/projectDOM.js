@@ -87,4 +87,4 @@ function displayProjects() {
 }
 
 
-export { projectStartup };
+export { projectStartup, displayProjects };

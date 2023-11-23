@@ -1,4 +1,4 @@
-import { projectStartup } from "./projectDOM.js"
+import { projectStartup, displayProjects } from "./projectDOM.js"
 import { taskFormStartup } from "./taskFormDOM.js";
 
 const projects = (function() {
