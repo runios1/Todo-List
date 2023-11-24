@@ -49,9 +49,13 @@ function createForm() {
     form.appendChild(descriptionLabel);
     const description = document.createElement('textarea');
     description.name = 'description';
+    description.rows = 8;
     form.appendChild(description);
     formDOMElements.push(description)
 
+    const priority = form.querySelector('#priority');
+    priority.max = 5;
+    priority.min = 1;
 
     
     const submit = document.createElement('button');

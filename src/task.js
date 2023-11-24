@@ -8,6 +8,7 @@ class TaskProperty {
     formQuery() {
         const input = document.createElement('input');
         input.name = this.name;
+        input.id = this.name;
         input.value = this.value;
         input.type = this.inputType;
         return input;
@@ -19,7 +20,7 @@ class Task {
         this._name = new TaskProperty('name', '', 'text');
         this._time = new TaskProperty('time', '', 'datetime-local');
         this._description = new TaskProperty('description', '', 'N/A');
-        this._priority = new TaskProperty('priority', '', 'N/A');
+        this._priority = new TaskProperty('priority', '', 'number');
     }
 
     /**
