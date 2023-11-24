@@ -1,5 +1,6 @@
 import { capitalize, selectedProject } from ".";
 import { Task } from "./task";
+import { displayTasks } from "./mainDOM";
 
 const taskDialog = document.querySelector('dialog.task');
 
@@ -49,6 +50,7 @@ function createForm() {
     form.appendChild(descriptionLabel);
     const description = document.createElement('textarea');
     description.name = 'description';
+    description.id = 'description';
     description.rows = 8;
     form.appendChild(description);
     formDOMElements.push(description)
@@ -68,7 +70,16 @@ function createForm() {
 
     form.addEventListener('submit',() => 
     {
-        selectedProject ? selectedProject.addTask(task) : noSelectedProjectHandler()
+        if(selectedProject) {
+            task.name = document.querySelector("#name").textContent;
+            task.description = document.querySelector("#description").textContent;
+            task.priority = document.querySelector("#priority").textContent;
+            task.time = document.querySelector("#time").textContent;
+            selectedProject.addTask(task);
+            displayTasks(selectedProject);
+        }else{ 
+            noSelectedProjectHandler()
+        }
     });
 
     taskDialog.addEventListener('click', (event) => {

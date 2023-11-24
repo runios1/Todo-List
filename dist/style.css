@@ -261,8 +261,8 @@ dialog.project input{
 }
 
 main>div.card{
-    height: 85%;
-    width: 90%;
+    height: 90%;
+    width: 95%;
     align-self: center;
 }
 
@@ -290,4 +290,18 @@ button#close{
 textarea{
     width: 500px;
     resize: vertical;
+}
+
+.card, #card-header{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#card-header{
+    padding: 20px;
+}
+
+.card h3{
+    font-size: 3rem;
+    margin-left: 20px;
 }

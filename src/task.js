@@ -27,28 +27,28 @@ class Task {
      * @param {{ value: text; }} newName
      */
     set name(newName) {
-        this.name.value = newName;
+        this._name.value = newName;
     }
 
     /**
      * @param {{ value: time; }} newTime
      */
     set time(newTime) {
-        this.time.value = newTime;
+        this._time.value = newTime;
     }
 
     /**
      * @param {{ value: text; }} newDescription
      */
     set description(newDescription) {
-        this.description.value = newDescription;
+        this._description.value = newDescription;
     }
 
     /**
      * @param {{ value: number; }} newPriority
      */
     set priority(newPriority) {
-        this.priority.value = newPriority;
+        this._priority.value = newPriority;
     }
 
 

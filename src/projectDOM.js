@@ -1,6 +1,8 @@
 import { Project } from "./project";
 import { deselectProject, projects, selectProject, selectedProject } from "./index";
 import { colorPickerClickHandler } from "./colorPickerDOM";
+import { displayProjectCard } from "./mainDOM"
+
 
 const projectDialog = document.querySelector('dialog.project');
 let selectedProjectDOMElement = null;
@@ -68,6 +70,7 @@ function displayProjects() {
                 selectedProjectDOMElement.className = "";
             } 
             selectProject(project);
+            displayProjectCard(project);
             selectedProjectDOMElement = projectElement;
             projectElement.className = "selected";
         });
