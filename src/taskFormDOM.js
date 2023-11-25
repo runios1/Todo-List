@@ -1,6 +1,7 @@
 import { capitalize, selectedProject } from ".";
 import { Task } from "./task";
 import { displayTasks } from "./mainDOM";
+import { createTaskInfoDialog } from "./taskInfoDOM"
 
 const taskDialog = document.querySelector('dialog.task');
 
@@ -74,6 +75,7 @@ function createForm() {
             const newTask = new Task(document.querySelector("#name").value,document.querySelector("#time").value,document.querySelector("#description").value,document.querySelector("#priority").value);
             selectedProject.addTask(newTask);
             displayTasks(selectedProject);
+            createTaskInfoDialog(newTask);
         }else{ 
             noSelectedProjectHandler()
         }
