@@ -1,3 +1,4 @@
+import { format, isPast, isToday, isTomorrow, isThisWeek, parseISO } from "date-fns";
 
 function displayProjectCard(project) {
     const main = document.querySelector('main > div.card');
@@ -22,7 +23,8 @@ function displayProjectCard(project) {
 
 function displayTasks(project) {
     const tasks = document.getElementById("task-list");
-    for(const task of project.tasks){
+    tasks.innerHTML = '';
+    for(let task of project.tasks){
         const taskDiv = document.createElement('div');
         tasks.appendChild(taskDiv);
 
@@ -31,9 +33,18 @@ function displayTasks(project) {
         taskDiv.appendChild(name);
 
         const date = document.createElement('span');
-        date.textContent = task.date;
+        date.textContent = calculateTime(task.time);
         taskDiv.appendChild(date);
     }
+}
+
+function calculateTime(time) {
+    const parsedTime = parseISO(time);
+    return isPast(parsedTime) ? "Overdue" :
+        isToday(parsedTime) ? format(parsedTime,"k:mm") :
+        isTomorrow(parsedTime) ? format(parsedTime,"k:mm")+", Tommorow" :
+        isThisWeek(parsedTime) ? getDay(parsedTime) :
+        format(parsedTime,"MMM do, yyyy");
 }
 
 export { displayProjectCard, displayTasks }

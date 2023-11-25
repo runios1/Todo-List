@@ -99,6 +99,15 @@ form.task input, textarea{
     margin-bottom: 10px;
 }
 
+#task-list>div{
+    padding: 20px 25px;
+    display: flex;
+}
+
+#task-list>div span:nth-child(1){
+    margin-right: auto;
+}
+
     /* nav */
 
 nav{

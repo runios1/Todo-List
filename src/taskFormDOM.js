@@ -53,7 +53,7 @@ function createForm() {
     description.id = 'description';
     description.rows = 8;
     form.appendChild(description);
-    formDOMElements.push(description)
+    formDOMElements.push(description);
 
     const priority = form.querySelector('#priority');
     priority.max = 5;
@@ -71,11 +71,8 @@ function createForm() {
     form.addEventListener('submit',() => 
     {
         if(selectedProject) {
-            task.name = document.querySelector("#name").textContent;
-            task.description = document.querySelector("#description").textContent;
-            task.priority = document.querySelector("#priority").textContent;
-            task.time = document.querySelector("#time").textContent;
-            selectedProject.addTask(task);
+            const newTask = new Task(document.querySelector("#name").value,document.querySelector("#time").value,document.querySelector("#description").value,document.querySelector("#priority").value);
+            selectedProject.addTask(newTask);
             displayTasks(selectedProject);
         }else{ 
             noSelectedProjectHandler()

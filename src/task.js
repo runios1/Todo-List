@@ -16,11 +16,11 @@ class TaskProperty {
 }
 
 class Task {
-    constructor() {
-        this._name = new TaskProperty('name', '', 'text');
-        this._time = new TaskProperty('time', '', 'datetime-local');
-        this._description = new TaskProperty('description', '', 'N/A');
-        this._priority = new TaskProperty('priority', '', 'number');
+    constructor(nameVal='',timeVal='',descriptionVal='',priorityVal='') {
+        this._name = new TaskProperty('name', nameVal, 'text');
+        this._time = new TaskProperty('time', timeVal, 'datetime-local');
+        this._description = new TaskProperty('description', descriptionVal, 'N/A');
+        this._priority = new TaskProperty('priority', priorityVal, 'number');
     }
 
     /**
