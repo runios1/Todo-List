@@ -85,7 +85,6 @@ form{
     /* main */
 
 main{
-    overflow: scroll;
     flex-grow: 1;
     display: flex;
     justify-content: center;
@@ -188,6 +187,69 @@ main{
 
 
 
+.card{
+    background-color: white;
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    border: none;
+}
+
+main>div.card{
+    height: 90%;
+    width: 95%;
+    align-self: center;
+    overflow: scroll;
+}
+
+dialog.task button{
+    border-radius: 100px;
+    border: none;
+    background-color: var(--teal);
+    color: white;
+}
+
+dialog.task button[type="submit"]{
+    width: 70px;
+    height: 25px;
+    align-self: center;
+    font-weight: bold;
+}
+
+button#close{
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    font-size: 0.75rem;
+}
+
+textarea{
+    width: 500px;
+    resize: vertical;
+}
+
+.card, #card-header{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#card-header{
+    padding: 20px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+.card h3{
+    font-size: 3rem;
+    margin-left: 20px;
+}
+
+#task-list > div:hover{
+    background-color: var(--lightgray);
+}
+
+
+
     /* nav */
 
 nav{
@@ -260,57 +322,4 @@ dialog.project{
 dialog.project input{
     border: none;
     padding: 0;
-}
-
-.card{
-    background-color: white;
-    box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
-    border-radius: 10px;
-    border: none;
-}
-
-main>div.card{
-    height: 90%;
-    width: 95%;
-    align-self: center;
-}
-
-dialog.task button{
-    border-radius: 100px;
-    border: none;
-    background-color: var(--teal);
-    color: white;
-}
-
-dialog.task button[type="submit"]{
-    width: 70px;
-    height: 25px;
-    align-self: center;
-    font-weight: bold;
-}
-
-button#close{
-    width: 20px;
-    height: 20px;
-    font-weight: bold;
-    font-size: 0.75rem;
-}
-
-textarea{
-    width: 500px;
-    resize: vertical;
-}
-
-.card, #card-header{
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-#card-header{
-    padding: 20px;
-}
-
-.card h3{
-    font-size: 3rem;
-    margin-left: 20px;
 }
