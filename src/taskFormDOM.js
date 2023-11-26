@@ -17,6 +17,7 @@ function newTaskButton() {
         form.addEventListener('submit',newTaskSubmitHandler);
         taskDialog.showModal();
     });
+    addTaskButton.style.display = "none";
 }
 
 function getTaskDialogForm() {

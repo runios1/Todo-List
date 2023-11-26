@@ -2,6 +2,7 @@ import { format, isPast, isToday, isTomorrow, isThisWeek, parseISO } from "date-
 import { newTaskSubmitHandler } from "./taskFormDOM";
 
 function displayProjectCard(project) {
+    document.getElementById('addTaskButton').style.display = "block";
     const main = document.querySelector('main > div.card');
 
     main.innerHTML = '';
