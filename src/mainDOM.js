@@ -1,4 +1,5 @@
 import { format, isPast, isToday, isTomorrow, isThisWeek, parseISO } from "date-fns";
+import { newTaskSubmitHandler } from "./taskFormDOM";
 
 function displayProjectCard(project) {
     const main = document.querySelector('main > div.card');
@@ -51,7 +52,25 @@ function calculateTime(time) {
 }
 
 function taskClickHandler(task) {
-    task.dialog.value.showModal();
+    const taskDialog = document.querySelector('dialog.task');
+    const properties = Object.keys(task);
+    properties.forEach(property => {
+        const input = document.getElementById(task[property].name);
+        input.value = task[property].value;
+    });
+    const form = taskDialog.querySelector('form');
+    const submit = taskDialog.querySelector('button[type="submit"]');
+    submit.textContent = "Apply";
+    form.removeEventListener('submit',newTaskSubmitHandler);
+    form.addEventListener('submit',() => changeTaskSubmitHandler(task,properties));
+    taskDialog.showModal();
 }
 
-export { displayProjectCard, displayTasks }
+function changeTaskSubmitHandler(task,properties){
+    properties.forEach(property => {
+        const input = document.getElementById(task[property].name);
+        task[property].value = input.value;
+    });
+}
+
+export { displayProjectCard, displayTasks,changeTaskSubmitHandler }

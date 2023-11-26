@@ -1,5 +1,5 @@
 import { Project } from "./project";
-import { deselectProject, projects, selectProject, selectedProject } from "./index";
+import { deselectProject, projects, selectProject } from "./index";
 import { colorPickerClickHandler } from "./colorPickerDOM";
 import { displayProjectCard } from "./mainDOM"
 

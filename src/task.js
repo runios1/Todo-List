@@ -21,7 +21,6 @@ class Task {
         this._time = new TaskProperty('time', timeVal, 'datetime-local');
         this._description = new TaskProperty('description', descriptionVal, 'N/A');
         this._priority = new TaskProperty('priority', priorityVal, 'number');
-        this.dialog = new TaskProperty('dialog', document.createElement('dialog'),'N/A');
     }
 
     /**

@@ -1,7 +1,6 @@
 import { capitalize, selectedProject } from ".";
 import { Task } from "./task";
-import { displayTasks } from "./mainDOM";
-import { createTaskInfoDialog } from "./taskInfoDOM"
+import { displayTasks,changeTaskSubmitHandler } from "./mainDOM";
 
 const taskDialog = document.querySelector('dialog.task');
 
@@ -13,6 +12,10 @@ function taskFormStartup(){
 function newTaskButton() {
     const addTaskButton = document.getElementById('addTaskButton');
     addTaskButton.addEventListener('click',() => {
+        const form = taskDialog.querySelector('form');
+        form.reset();
+        form.removeEventListener('submit',changeTaskSubmitHandler);
+        form.addEventListener('submit',newTaskSubmitHandler);
         taskDialog.showModal();
     });
 }
@@ -21,6 +24,7 @@ function getTaskDialogForm() {
     const container = taskDialog.querySelector('.formContainer');
     const close = taskDialog.querySelector('button');
     close.addEventListener('click',() => taskDialog.close());
+    taskDialog.addEventListener('close',() => displayTasks(selectedProject));
     container.appendChild(createForm());
 }
 
@@ -69,18 +73,6 @@ function createForm() {
     form.appendChild(submit);
     formDOMElements.push(submit);
 
-    form.addEventListener('submit',() => 
-    {
-        if(selectedProject) {
-            const newTask = new Task(document.querySelector("#name").value,document.querySelector("#time").value,document.querySelector("#description").value,document.querySelector("#priority").value);
-            selectedProject.addTask(newTask);
-            displayTasks(selectedProject);
-            createTaskInfoDialog(newTask);
-        }else{ 
-            noSelectedProjectHandler()
-        }
-    });
-
     taskDialog.addEventListener('click', (event) => {
         dialogBackdropClickHandler(event,formDOMElements);
     });
@@ -108,4 +100,14 @@ function noSelectedProjectHandler(){
     alert("No selected project");
 }
 
-export { taskFormStartup }
+function newTaskSubmitHandler(){
+    if(selectedProject) {
+        const newTask = new Task(document.querySelector("#name").value,document.querySelector("#time").value,document.querySelector("#description").value,document.querySelector("#priority").value);
+        selectedProject.addTask(newTask);
+        displayTasks(selectedProject);
+    }else{ 
+        noSelectedProjectHandler()
+    }
+}
+
+export { taskFormStartup,newTaskSubmitHandler }
