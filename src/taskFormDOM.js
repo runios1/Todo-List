@@ -1,6 +1,6 @@
 import { capitalize, selectedProject } from ".";
 import { Task } from "./task";
-import { displayTasks,changeTaskSubmitHandler } from "./mainDOM";
+import { displayTasks,taskClickHandler } from "./mainDOM";
 
 const taskDialog = document.querySelector('dialog.task');
 
@@ -14,7 +14,6 @@ function newTaskButton() {
     addTaskButton.addEventListener('click',() => {
         const form = taskDialog.querySelector('form');
         form.reset();
-        form.removeEventListener('submit',changeTaskSubmitHandler);
         form.addEventListener('submit',newTaskSubmitHandler);
         taskDialog.showModal();
     });

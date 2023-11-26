@@ -62,15 +62,18 @@ function taskClickHandler(task) {
     const submit = taskDialog.querySelector('button[type="submit"]');
     submit.textContent = "Apply";
     form.removeEventListener('submit',newTaskSubmitHandler);
-    form.addEventListener('submit',() => changeTaskSubmitHandler(task,properties));
+    form.addEventListener('submit',changeTaskSubmitHandler);
+    taskDialog.addEventListener('close',() => form.removeEventListener('submit',changeTaskSubmitHandler));
     taskDialog.showModal();
+
+    function changeTaskSubmitHandler(){
+        properties.forEach(property => {
+            const input = document.getElementById(task[property].name);
+            task[property].value = input.value;
+        });
+    }
 }
 
-function changeTaskSubmitHandler(task,properties){
-    properties.forEach(property => {
-        const input = document.getElementById(task[property].name);
-        task[property].value = input.value;
-    });
-}
 
-export { displayProjectCard, displayTasks,changeTaskSubmitHandler }
+
+export { displayProjectCard, displayTasks, taskClickHandler }
