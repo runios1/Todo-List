@@ -1,12 +1,26 @@
-import { capitalize, selectedProject } from '.';
+import { selectedProject } from './selectedProject';
 import { Task, maxPriority, minPriority } from './task';
-import { displayTasks } from './mainDOM';
 
 const taskDialog = document.querySelector('dialog.task');
 
-function taskFormStartup() {
-  newTaskButton();
-  getTaskDialogForm();
+function validateTaskForm(){
+  return true;
+}
+
+function noSelectedProjectHandler() {
+  alert('No selected project');
+}
+
+
+function newTaskSubmitHandler() {
+  if (selectedProject) {
+    if (validateTaskForm()) {
+      const newTask = new Task(document.querySelector('#name').value, document.querySelector('#time').value, document.querySelector('#description').value, document.querySelector('#priority').value);
+      selectedProject.addTask(newTask);
+    }
+  } else {
+    noSelectedProjectHandler();
+  }
 }
 
 function newTaskButton() {
@@ -20,12 +34,23 @@ function newTaskButton() {
   addTaskButton.style.display = 'none';
 }
 
-function getTaskDialogForm() {
-  const container = taskDialog.querySelector('.formContainer');
-  const close = taskDialog.querySelector('button');
-  close.addEventListener('click', () => taskDialog.close());
-  taskDialog.addEventListener('close', () => displayTasks(selectedProject));
-  container.appendChild(createForm());
+function dialogBackdropClickHandler(event, formDOMElements) { // Close dialog when click is outside dialog box
+  const rect = taskDialog.getBoundingClientRect();
+  const isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height
+        && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+
+  let isInteractingWithForm = false;
+  formDOMElements.forEach((element) =>{
+    if(document.activeElement === element) isInteractingWithForm = true;
+  });
+
+  if (!isInDialog && !isInteractingWithForm) {
+    taskDialog.close();
+  }
+}
+
+function capitalize(string){
+  return string[0].toUpperCase() + string.slice(1);
 }
 
 function createForm() {
@@ -34,7 +59,8 @@ function createForm() {
   form.className = 'task';
 
   const task = new Task();
-  const properties = Object.keys(task);
+  let properties = Object.getOwnPropertyNames(Object.getPrototypeOf(task));
+  properties = properties.slice(1,properties.length);
 
   const formDOMElements = [];
 
@@ -79,36 +105,15 @@ function createForm() {
   return form;
 }
 
-function dialogBackdropClickHandler(event, formDOMElements) { // Close dialog when click is outside dialog box
-  const rect = taskDialog.getBoundingClientRect();
-  const isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height
-        && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
-
-  let isInteractingWithForm = false;
-  for (const element of formDOMElements) {
-    if (isInteractingWithForm) break;
-    isInteractingWithForm = document.activeElement === element;
-  }
-
-  if (!isInDialog && !isInteractingWithForm) {
-    taskDialog.close();
-  }
+function getTaskDialogForm() {
+  const container = taskDialog.querySelector('.formContainer');
+  const close = taskDialog.querySelector('button');
+  close.addEventListener('click', () => taskDialog.close());
+  container.appendChild(createForm());
 }
 
-function noSelectedProjectHandler() {
-  alert('No selected project');
-}
 
-function newTaskSubmitHandler() {
-  if (selectedProject) {
-    if (validateTaskForm()) {
-      const newTask = new Task(document.querySelector('#name').value, document.querySelector('#time').value, document.querySelector('#description').value, document.querySelector('#priority').value);
-      selectedProject.addTask(newTask);
-      displayTasks(selectedProject);
-    }
-  } else {
-    noSelectedProjectHandler();
-  }
-}
+newTaskButton();
+getTaskDialogForm();
 
-export { taskFormStartup, newTaskSubmitHandler };
+export default newTaskSubmitHandler;

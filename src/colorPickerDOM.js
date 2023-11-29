@@ -1,4 +1,3 @@
-
 function colorButton(color,colorPicker,colorContainer,project){
     const domElement = document.createElement('button');
     domElement.className = "colorPicker";
@@ -26,4 +25,4 @@ function colorPickerClickHandler(event,project) {
     colorButton('yellow',colorPicker,colorContainer,project);
 }
 
-export {colorPickerClickHandler}
+export default colorPickerClickHandler

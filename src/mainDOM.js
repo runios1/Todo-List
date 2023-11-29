@@ -1,9 +1,63 @@
-import {
-  format, isPast, isToday, isTomorrow, isThisWeek, parseISO,
-} from 'date-fns';
-import { newTaskSubmitHandler } from './taskFormDOM';
+import {format, isPast, isToday, isTomorrow, isThisWeek, parseISO, getDay} from 'date-fns';
+import newTaskSubmitHandler from './taskFormDOM';
+
+function calculateTime(time) {
+  const parsedTime = parseISO(time);
+  if(isPast(parsedTime)) return 'Overdue' 
+  if(isToday(parsedTime)) return format(parsedTime, 'k:mm')
+  if(isTomorrow(parsedTime)) return `${format(parsedTime, 'k:mm')}, Tommorow`
+  if(isThisWeek(parsedTime))return getDay(parsedTime)  
+  return format(parsedTime, 'MMM do, yyyy');
+}
+
+function taskClickHandler(task) {
+  const properties = Object.keys(task);
+  
+  function changeTaskSubmitHandler() {
+    properties.forEach((property) => {
+      const input = document.getElementById(task[property].name.value);
+      task[property] = input.value;
+    });
+  }
+
+  const taskDialog = document.querySelector('dialog.task');
+  properties.forEach((property) => {
+    const input = document.getElementById(task[property].name.value);
+    input.value = task[property].value;
+  });
+  const form = taskDialog.querySelector('form');
+  const submit = taskDialog.querySelector('button[type="submit"]');
+  submit.textContent = 'Apply';
+  form.removeEventListener('submit', newTaskSubmitHandler);
+  form.addEventListener('submit', changeTaskSubmitHandler);
+  taskDialog.addEventListener('close', () => form.removeEventListener('submit', changeTaskSubmitHandler));
+  taskDialog.showModal();
+}
+
+function displayTasks(project) {
+  const tasks = document.getElementById('task-list');
+  tasks.innerHTML = '';
+  project.tasks.forEach((task) => {
+    const taskDiv = document.createElement('div');
+    taskDiv.addEventListener('click', () => taskClickHandler(task));
+    tasks.appendChild(taskDiv);
+
+    const name = document.createElement('span');
+    name.textContent = task.name.value;
+    taskDiv.appendChild(name);
+
+    if (task.time.value !== '') {
+      const date = document.createElement('span');
+      date.textContent = calculateTime(task.time.value);
+      taskDiv.appendChild(date);
+    }
+  });
+}
 
 function displayProjectCard(project) {
+  const dialog = document.querySelector('dialog.task');
+  dialog.addEventListener('close', () => displayTasks(project));
+
   document.getElementById('addTaskButton').style.display = 'block';
   const main = document.querySelector('main > div.card');
 
@@ -23,58 +77,6 @@ function displayProjectCard(project) {
   main.appendChild(tasks);
 
   displayTasks(project);
-}
-
-function displayTasks(project) {
-  const tasks = document.getElementById('task-list');
-  tasks.innerHTML = '';
-  for (const task of project.tasks) {
-    const taskDiv = document.createElement('div');
-    taskDiv.addEventListener('click', () => taskClickHandler(task));
-    tasks.appendChild(taskDiv);
-
-    const name = document.createElement('span');
-    name.textContent = task.name;
-    taskDiv.appendChild(name);
-
-    if (task.time !== '') {
-      const date = document.createElement('span');
-      date.textContent = calculateTime(task.time);
-      taskDiv.appendChild(date);
-    }
-  }
-}
-
-function calculateTime(time) {
-  const parsedTime = parseISO(time);
-  return isPast(parsedTime) ? 'Overdue'
-    : isToday(parsedTime) ? format(parsedTime, 'k:mm')
-      : isTomorrow(parsedTime) ? `${format(parsedTime, 'k:mm')}, Tommorow`
-        : isThisWeek(parsedTime) ? getDay(parsedTime)
-          : format(parsedTime, 'MMM do, yyyy');
-}
-
-function taskClickHandler(task) {
-  const taskDialog = document.querySelector('dialog.task');
-  const properties = Object.keys(task);
-  properties.forEach((property) => {
-    const input = document.getElementById(task[property].name);
-    input.value = task[property].value;
-  });
-  const form = taskDialog.querySelector('form');
-  const submit = taskDialog.querySelector('button[type="submit"]');
-  submit.textContent = 'Apply';
-  form.removeEventListener('submit', newTaskSubmitHandler);
-  form.addEventListener('submit', changeTaskSubmitHandler);
-  taskDialog.addEventListener('close', () => form.removeEventListener('submit', changeTaskSubmitHandler));
-  taskDialog.showModal();
-
-  function changeTaskSubmitHandler() {
-    properties.forEach((property) => {
-      const input = document.getElementById(task[property].name);
-      task[property] = input.value;
-    });
-  }
 }
 
 export { displayProjectCard, displayTasks, taskClickHandler };
