@@ -3,323 +3,409 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
-ol, ul {
-	list-style: none;
+ol,
+ul {
+  list-style: none;
 }
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
-
 
 /* General */
 
-
-:root{
-    --teal: #0D9488;
-    --hoverteal: #0f766e;
-    --pressedteal: #115e59;
-    --lightgray: #f3f4f6;
-    --gray: #737373;
-    --grayPressed: rgb(81, 81, 81); 
+:root {
+  --teal: #0d9488;
+  --hoverteal: #0f766e;
+  --pressedteal: #115e59;
+  --lightgray: #f3f4f6;
+  --gray: #737373;
+  --grayPressed: rgb(81, 81, 81);
 }
 
-body{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+body {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
-
 
 /* Layout */
 
-    /* General */
+/* General */
 
-body{
-    height: 100vh;
-    display: flex;
+body {
+  height: 100vh;
+  display: flex;
 }
 
-form{
-    display: flex;
+form {
+  display: flex;
 }
 
-.flexContainer{
-    display: flex;
+.flexContainer {
+  display: flex;
 }
 
-    /* main */
+/* main */
 
-main{
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
+main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
 }
 
-form.task{
-    flex-direction: column;
+form.task {
+  flex-direction: column;
 }
 
-form.task input, textarea{
-    margin-bottom: 10px;
+form.task input,
+textarea {
+  margin-bottom: 10px;
 }
 
-#task-list>div{
-    padding: 20px 25px;
-    display: flex;
+#task-list > div {
+  padding: 20px 25px;
+  display: flex;
 }
 
-#task-list>div span:nth-child(1){
-    margin-right: auto;
+#task-list > div span:nth-child(1) {
+  margin-right: auto;
 }
 
-    /* nav */
+/* nav */
 
-nav{
-    width: 250px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+nav {
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-dialog.project{
-    margin: 0px;
-    padding: 0px;
+dialog.project {
+  margin: 0px;
+  padding: 0px;
 }
 
-#projects>div, dialog.project{
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+#projects > div,
+dialog.project {
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-#projects>div{
-    display: flex;
-    align-items: center;
+#projects > div {
+  display: flex;
+  align-items: center;
 }
 
-#projects{
-    overflow: scroll;
+#projects {
+  overflow: scroll;
 }
 
-form.project{
-    align-items: center;
+form.project {
+  align-items: center;
 }
 
-.flexContainer.task{
-    flex-direction: column;
+.flexContainer.task {
+  flex-direction: column;
 }
 
-button#close{
-    margin-left: auto;
+button#close {
+  margin-left: auto;
 }
-
 
 /* Element Design */
 
-    /* General */
+/* General */
 
-.coloredButton{
-    background-color: var(--teal);
-    color: white;
+.coloredButton {
+  background-color: var(--teal);
+  color: white;
 }
 
-.coloredButton:hover{
-    background-color: var(--hoverteal);
+.coloredButton:hover {
+  background-color: var(--hoverteal);
 }
 
-.coloredButton:active{
-    background-color: var(--pressedteal);
+.coloredButton:active {
+  background-color: var(--pressedteal);
 }
 
-    /* main */
+/* main */
 
-main{
-    background-color: var(--lightgray);
+main {
+  background-color: var(--lightgray);
 }
 
-#addTaskButton{
-    position: fixed;
-    bottom: 50px;
-    right: 70px;
-    border: none;
-    border-radius: 50px;
-    height: 50px;
-    width: 50px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-align: center;
+#addTaskButton {
+  position: fixed;
+  bottom: 50px;
+  right: 70px;
+  border: none;
+  border-radius: 50px;
+  height: 50px;
+  width: 50px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
 }
 
-
-
-.card{
-    background-color: white;
-    box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
-    border-radius: 10px;
-    border: none;
+.card {
+  background-color: white;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  border: none;
 }
 
-main>div.card{
-    height: 90%;
-    width: 95%;
-    align-self: center;
-    overflow: scroll;
+main > div.card {
+  height: 90%;
+  width: 95%;
+  align-self: center;
+  overflow: scroll;
 }
 
-dialog.task button{
-    border-radius: 100px;
-    border: none;
-    background-color: var(--teal);
-    color: white;
+dialog.task button {
+  border-radius: 100px;
+  border: none;
+  background-color: var(--teal);
+  color: white;
 }
 
-dialog.task button[type="submit"]{
-    width: 70px;
-    height: 25px;
-    align-self: center;
-    font-weight: bold;
+dialog.task button[type="submit"] {
+  width: 70px;
+  height: 25px;
+  align-self: center;
+  font-weight: bold;
 }
 
-button#close{
-    width: 20px;
-    height: 20px;
-    font-weight: bold;
-    font-size: 0.75rem;
+button#close {
+  width: 20px;
+  height: 20px;
+  font-weight: bold;
+  font-size: 0.75rem;
 }
 
-textarea{
-    width: 500px;
-    resize: vertical;
+textarea {
+  width: 500px;
+  resize: vertical;
 }
 
-.card, #card-header{
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+.card,
+#card-header {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
-#card-header{
-    padding: 20px;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
+#card-header {
+  padding: 20px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
-.card h3{
-    font-size: 3rem;
-    margin-left: 20px;
+.card h3 {
+  font-size: 3rem;
+  margin-left: 20px;
 }
 
-#task-list > div:hover{
-    background-color: var(--lightgray);
+#task-list > div:hover {
+  background-color: var(--lightgray);
 }
 
+/* nav */
 
-
-    /* nav */
-
-nav{
-    box-shadow: 1px 0px 5px rgba(0,0,0,0.1);
-    z-index: 1;
+nav {
+  box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
 }
 
-#logo{
-    align-self: center;
-    font-size: 4.5rem;
-    color: var(--teal);
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
-    font-weight: bold;
+#logo {
+  align-self: center;
+  font-size: 4.5rem;
+  color: var(--teal);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Noto Sans,
+    Ubuntu,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
+  font-weight: bold;
 }
 
-.sub-title{
-    font-family: arial;
-    font-size: 0.7rem;
-    color: var(--gray);
-    font-weight: bold;
-    margin: 10px;
+.sub-title {
+  font-family: arial;
+  font-size: 0.7rem;
+  color: var(--gray);
+  font-weight: bold;
+  margin: 10px;
 }
 
-#addProjectButton{
-    width: 100%;
-    align-self: center;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    background-color: darkgray;
+#addProjectButton {
+  width: 100%;
+  align-self: center;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  background-color: darkgray;
 }
 
-#addProjectButton:hover{
-    background-color: var(--gray);
+#addProjectButton:hover {
+  background-color: var(--gray);
 }
 
-#addProjectButton:active{
-    background-color: var(--grayPressed);
+#addProjectButton:active {
+  background-color: var(--grayPressed);
 }
 
-.colorPicker{
-    background-color: red;
-    height: 12px;
-    width: 12px;
-    border-radius: 100px;
-    border: 2px solid white;
-    outline: gray solid 1.5px;
-    margin-right: 5px;
+.colorPicker {
+  background-color: red;
+  height: 12px;
+  width: 12px;
+  border-radius: 100px;
+  border: 2px solid white;
+  outline: gray solid 1.5px;
+  margin-right: 5px;
 }
 
-dialog.project{
-    position: inherit;
-    border: none;
+dialog.project {
+  position: inherit;
+  border: none;
 }
 
-.colorContainer{
-    display: flex;
-    align-items: center;
+.colorContainer {
+  display: flex;
+  align-items: center;
 }
 
-#projects > div:hover , #projects > div.selected{
-    background-color: darkgray;
+#projects > div:hover,
+#projects > div.selected {
+  background-color: darkgray;
 }
 
-#projects > div.selected:hover{
-    background-color: gray;
+#projects > div.selected:hover {
+  background-color: gray;
 }
 
-dialog.project input{
-    border: none;
-    padding: 0;
+dialog.project input {
+  border: none;
+  padding: 0;
 }

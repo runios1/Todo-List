@@ -4,19 +4,24 @@ const minPriority = 1;
 const maxPriority = 5;
 
 class Task {
-  #name; 
-  
-  #time; 
-  
-  #description; 
-  
+  #name;
+
+  #time;
+
+  #description;
+
   #priority;
-  
-  constructor(nameVal = '', timeVal = '', descriptionVal = '', priorityVal = '') {
-    this.#name = new TaskProperty('name', nameVal, 'text');
-    this.#time = new TaskProperty('time', timeVal, 'datetime-local');
-    this.#description = new TaskProperty('description', descriptionVal, 'N/A');
-    this.#priority = new TaskProperty('priority', priorityVal, 'number');
+
+  constructor(
+    nameVal = "",
+    timeVal = "",
+    descriptionVal = "",
+    priorityVal = "",
+  ) {
+    this.#name = new TaskProperty("name", nameVal, "text");
+    this.#time = new TaskProperty("time", timeVal, "datetime-local");
+    this.#description = new TaskProperty("description", descriptionVal, "N/A");
+    this.#priority = new TaskProperty("priority", priorityVal, "number");
   }
 
   get name() {
@@ -24,8 +29,8 @@ class Task {
   }
 
   /**
-     * @param {{ value: text; }} newName
-     */
+   * @param {{ value: text; }} newName
+   */
   set name(newName) {
     this.#name.value = newName;
   }
@@ -35,8 +40,8 @@ class Task {
   }
 
   /**
-     * @param {{ value: time; }} newTime
-     */
+   * @param {{ value: time; }} newTime
+   */
   set time(newTime) {
     this.#time.value = newTime;
   }
@@ -46,8 +51,8 @@ class Task {
   }
 
   /**
-     * @param {{ value: text; }} newDescription
-     */
+   * @param {{ value: text; }} newDescription
+   */
   set description(newDescription) {
     this.#description.value = newDescription;
   }
@@ -57,16 +62,15 @@ class Task {
   }
 
   /**
-     * @param {{ value: number; }} newPriority
-     */
+   * @param {{ value: number; }} newPriority
+   */
   set priority(newPriority) {
     // if (newPriority > maxPriority || newPriority < minPriority) {
     //   alert('Invalid priority value');
     // } else {
-      this.#priority.value = newPriority;
+    this.#priority.value = newPriority;
     // }
   }
-
 }
 
 // function validateTaskForm(time, description, priority) {

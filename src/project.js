@@ -1,13 +1,13 @@
-class Project{
-    constructor(name,color='red'){
-        this.name = name;
-        this.color = color;
-        this.tasks = [];
-    }
+class Project {
+  constructor(name, color = "red") {
+    this.name = name;
+    this.color = color;
+    this.tasks = [];
+  }
 
-    addTask(task){
-        this.tasks.push(task);
-    }
+  addTask(task) {
+    this.tasks.push(task);
+  }
 }
 
-export default Project
+export default Project;
