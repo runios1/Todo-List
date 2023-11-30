@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-mutable-exports
 let selectedProject = null;
 
-function selectProject(project) {
+function changeSelectedProject(project) {
   selectedProject = project;
   console.log(`Project ${project.name} is selected!`);
 }
@@ -11,4 +11,4 @@ function deselectProject() {
   console.log(`selectedProject now null!`);
 }
 
-export { selectProject, deselectProject, selectedProject };
+export { changeSelectedProject, deselectProject, selectedProject };

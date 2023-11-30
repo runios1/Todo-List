@@ -1,9 +1,9 @@
 import Project from "./project";
-import { deselectProject, selectProject } from "./selectedProject";
+import { changeSelectedProject } from "./selectedProject";
 import colorPickerClickHandler from "./colorPickerDOM";
 import { displayProjectCard } from "./mainDOM";
 
-const projects = (function () {
+const projects = (function() {
   const projectsArray = [];
   const addProject = (project) => {
     projectsArray.push(project);
@@ -16,23 +16,23 @@ const projects = (function () {
 const projectDialog = document.querySelector("dialog.project");
 let selectedProjectDOMElement = null;
 
-function displayProjects() {
-  selectedProjectDOMElement = null;
-  deselectProject();
+function selectProject(project) {
+  if (selectedProjectDOMElement) {
+    selectedProjectDOMElement.classList.toggle("selected");
+  }
+  changeSelectedProject(project);
+  displayProjectCard(project);
+  selectedProjectDOMElement = project.DOMElement;
+  project.DOMElement.classList.toggle("selected");
+}
 
+function displayProjects() {
   const container = document.getElementById("projects");
   container.innerHTML = "";
   projects.getProjects().forEach((project) => {
-    const projectElement = document.createElement("div");
-    projectElement.addEventListener("click", () => {
-      if (selectedProjectDOMElement) {
-        selectedProjectDOMElement.className = "";
-      }
-      selectProject(project);
-      displayProjectCard(project);
-      selectedProjectDOMElement = projectElement;
-      projectElement.className = "selected";
-    });
+    const projectElement = project.DOMElement;
+    projectElement.innerHTML = '';
+    projectElement.addEventListener("click", () => selectProject(project));
 
     const color = document.createElement("button");
     color.className = "colorPicker";
@@ -86,7 +86,8 @@ function getProjectDialogForm() {
     if (nameInput.value !== "") {
       const project = new Project(nameInput.value);
       projects.addProject(project);
-      displayProjects();
+      displayProjects(project);
+      selectProject(project);
     }
     projectDialog.close();
   });
