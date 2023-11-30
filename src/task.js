@@ -60,11 +60,11 @@ class Task {
      * @param {{ value: number; }} newPriority
      */
   set priority(newPriority) {
-    if (newPriority > maxPriority || newPriority < minPriority) {
-      alert('Invalid priority value');
-    } else {
+    // if (newPriority > maxPriority || newPriority < minPriority) {
+    //   alert('Invalid priority value');
+    // } else {
       this.#priority.value = newPriority;
-    }
+    // }
   }
 
 }

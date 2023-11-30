@@ -11,18 +11,19 @@ function calculateTime(time) {
 }
 
 function taskClickHandler(task) {
-  const properties = Object.keys(task);
+  let properties = Object.getOwnPropertyNames(Object.getPrototypeOf(task));
+  properties = properties.slice(1,properties.length);
   
   function changeTaskSubmitHandler() {
     properties.forEach((property) => {
-      const input = document.getElementById(task[property].name.value);
+      const input = document.getElementById(task[property].name);
       task[property] = input.value;
     });
   }
 
   const taskDialog = document.querySelector('dialog.task');
   properties.forEach((property) => {
-    const input = document.getElementById(task[property].name.value);
+    const input = document.getElementById(task[property].name);
     input.value = task[property].value;
   });
   const form = taskDialog.querySelector('form');
