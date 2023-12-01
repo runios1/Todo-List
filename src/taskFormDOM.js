@@ -32,14 +32,15 @@ function newTaskButton() {
   addTaskButton.addEventListener("click", () => {
     const form = taskDialog.querySelector("form");
     form.reset();
+    form.querySelector('button').textContent = "Submit";
     form.addEventListener("submit", newTaskSubmitHandler);
     taskDialog.showModal();
   });
   addTaskButton.style.display = "none";
 }
 
+// Close dialog when click is outside dialog box
 function dialogBackdropClickHandler(event, formDOMElements) {
-  // Close dialog when click is outside dialog box
   const rect = taskDialog.getBoundingClientRect();
   const isInDialog =
     rect.top <= event.clientY &&

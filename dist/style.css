@@ -182,12 +182,16 @@ textarea {
   margin-bottom: 10px;
 }
 
-#task-list > div {
+#task-list > button {
   padding: 20px 25px;
   display: flex;
+  width: 100%;
+  background-color: white;
+  border: none;
+  font-size: 1.05rem;
 }
 
-#task-list > div span:nth-child(1) {
+#task-list > button span:nth-child(1) {
   margin-right: auto;
 }
 
@@ -323,7 +327,7 @@ textarea {
   margin-left: 20px;
 }
 
-#task-list > div:hover {
+#task-list > button:hover {
   background-color: var(--lightgray);
 }
 

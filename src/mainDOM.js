@@ -49,7 +49,7 @@ function displayTasks(project) {
   const tasks = document.getElementById("task-list");
   tasks.innerHTML = "";
   project.tasks.forEach((task) => {
-    const taskDiv = document.createElement("div");
+    const taskDiv = document.createElement("button");
     taskDiv.addEventListener("click", () => taskClickHandler(task));
     tasks.appendChild(taskDiv);
 
