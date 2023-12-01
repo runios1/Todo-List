@@ -83,6 +83,8 @@ function createForm() {
     formDOMElements.push(input);
   });
 
+  form.querySelector("#name").autofocus = true;
+
   const descriptionLabel = document.createElement("label");
   descriptionLabel.for = "description";
   descriptionLabel.textContent = "Description";
