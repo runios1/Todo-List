@@ -311,12 +311,6 @@ textarea {
   resize: vertical;
 }
 
-.card,
-#card-header {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
 #card-header {
   padding: 20px;
   position: -webkit-sticky;
