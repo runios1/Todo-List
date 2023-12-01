@@ -384,6 +384,7 @@ nav {
   border: 2px solid white;
   outline: gray solid 1.5px;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 dialog.project {
