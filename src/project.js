@@ -3,7 +3,7 @@ class Project {
 
   #DOMElement
 
-  constructor(name, color = "red") {
+  constructor(name, color = "var(--colorPickerOption1)") {
     this.#name = name;
     this.color = color;
     this.#DOMElement = document.createElement('div');

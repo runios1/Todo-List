@@ -137,6 +137,11 @@ table {
   --lightgray: #f3f4f6;
   --gray: #737373;
   --grayPressed: rgb(81, 81, 81);
+
+  --colorPickerOption1:#FF6B6B;
+  --colorPickerOption2:#FFD93D;
+  --colorPickerOption3:#6BCB77;
+  --colorPickerOption4:#4D96FF;
 }
 
 body {
@@ -377,7 +382,7 @@ nav {
 }
 
 .colorPicker {
-  background-color: red;
+  background-color: var(--colorPickerOption1);
   height: 12px;
   width: 12px;
   border-radius: 100px;
