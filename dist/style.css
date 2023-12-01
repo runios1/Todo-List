@@ -205,16 +205,18 @@ dialog.project {
   padding: 0px;
 }
 
-#projects > div,
+#projects > button,
 dialog.project {
   padding-left: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
-#projects > div {
+#projects > button {
   display: flex;
   align-items: center;
+  border: none;
+  width: 100%;
 }
 
 #projects {
@@ -387,7 +389,6 @@ nav {
   width: 12px;
   border-radius: 100px;
   border: 2px solid white;
-  outline: gray solid 1.5px;
   margin-right: 5px;
   cursor: pointer;
 }
@@ -402,12 +403,12 @@ dialog.project {
   align-items: center;
 }
 
-#projects > div:hover,
-#projects > div.selected {
+#projects > button:hover,
+#projects > button.selected {
   background-color: darkgray;
 }
 
-#projects > div.selected:hover {
+#projects > button.selected:hover {
   background-color: gray;
 }
 

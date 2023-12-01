@@ -6,7 +6,7 @@ class Project {
   constructor(name, color = "var(--colorPickerOption1)") {
     this.#name = name;
     this.color = color;
-    this.#DOMElement = document.createElement('div');
+    this.#DOMElement = document.createElement('button');
     this.tasks = [];
   }
 
