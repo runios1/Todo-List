@@ -24,11 +24,13 @@ function deselectProject(project) {
   toggleSelectedProject(project);
   displayProjectCard(null);
   selectedProjectDOMElement = null;
+  document.getElementById('addTaskButton').style.display = "none";
   return true;
 }
 
 function deleteClickHandler(project) {
-  if(isSelectedProject(project)) deselectProject(project);
+  if(isSelectedProject(project))
+   deselectProject(project);
   projects.deleteProject(project);
   document.dispatchEvent(projectsUpdatedEvent);
 }
@@ -39,7 +41,6 @@ function displayProjects() {
   projects.getProjects().forEach((project) => {
     const projectElement = project.DOMElement;
     projectElement.innerHTML = '';
-    projectElement.addEventListener("click", () => selectProject(project));
 
     const color = document.createElement("button");
     color.className = "colorPicker";
@@ -103,6 +104,7 @@ function getProjectDialogForm() {
     if (nameInput.value !== "") {
       const project = new Project(nameInput.value);
       projects.addProject(project);
+      project.DOMElement.addEventListener("click", () => selectProject(project));
       document.dispatchEvent(projectsUpdatedEvent);
       selectProject(project);
     }

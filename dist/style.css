@@ -415,3 +415,22 @@ dialog.project input {
   border: none;
   padding: 0;
 }
+
+#projects > button > span{
+  margin-right: auto;
+}
+
+.editProjectButton{
+  height: 1.5rem;
+  width: 1.65rem;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.editProjectButton:hover{
+  background: rgba(0, 0, 0, 0.2);
+}
