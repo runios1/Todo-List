@@ -23,4 +23,21 @@ class Project {
   }
 }
 
-export default Project;
+
+const projects = (function() {
+  const projectsArray = [];
+  const addProject = (project) => {
+    projectsArray.push(project);
+  };
+  const deleteProject = (project) => {
+    const index = projectsArray.indexOf(project);
+    if (index > -1) {
+      projectsArray.splice(index, 1);
+    }
+  };
+  const getProjects = () => projectsArray;
+
+  return { addProject, deleteProject, getProjects };
+})();
+
+export { Project, projects };
