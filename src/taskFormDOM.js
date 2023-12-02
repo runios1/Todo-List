@@ -84,7 +84,10 @@ function createForm() {
     formDOMElements.push(input);
   });
 
-  form.querySelector("#name").autofocus = true;
+  const nameInput = form.querySelector("#name");
+  nameInput.autofocus = true;
+  nameInput.maxLength = "30";
+  nameInput.pattern = /^[a-z0-9]+$/i;  // DOESN'T WORK!!
 
   const descriptionLabel = document.createElement("label");
   descriptionLabel.for = "description";

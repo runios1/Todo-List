@@ -80,6 +80,8 @@ function createForm(previousName="") {
   name.type = "text";
   name.placeholder = "Name";
   name.autofocus = true;
+  name.maxLength = "25";
+  name.pattern = /^[a-z0-9]+$/i;  // DOESN'T WORK!!
   name.value = previousName;
   form.appendChild(name);
 
@@ -100,7 +102,7 @@ function getProjectDialogForm() {
   const form = createForm();
   container.appendChild(form);
   const nameInput = form.querySelector('input[type="text"]');
-  nameInput.addEventListener("focusout", () => {
+  form.addEventListener('submit', () => {
     if (nameInput.value !== "") {
       const project = new Project(nameInput.value);
       projects.addProject(project);
@@ -110,6 +112,7 @@ function getProjectDialogForm() {
     }
     projectDialog.close();
   });
+  nameInput.addEventListener("focusout", form.submit);
 }
 
 getProjectDialogForm();
