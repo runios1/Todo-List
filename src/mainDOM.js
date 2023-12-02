@@ -66,13 +66,14 @@ function displayTasks(project) {
 }
 
 function displayProjectCard(project) {
+  const main = document.querySelector("main > div.card");
+  main.innerHTML = "";
+  document.getElementById("addTaskButton").style.display = "block";
+
+  if(project === null) return;
+
   const dialog = document.querySelector("dialog.task");
   dialog.addEventListener("close", () => displayTasks(project));
-
-  document.getElementById("addTaskButton").style.display = "block";
-  const main = document.querySelector("main > div.card");
-
-  main.innerHTML = "";
 
   const header = document.createElement("div");
   header.id = "card-header";

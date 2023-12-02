@@ -1,29 +1,36 @@
-import Project from "./project";
-import { changeSelectedProject } from "./selectedProject";
+import { Project, projects } from "./project";
+import { toggleSelectedProject, isSelectedProject } from "./selectedProject";
 import colorPickerClickHandler from "./colorPickerDOM";
 import { displayProjectCard } from "./mainDOM";
-
-const projects = (function() {
-  const projectsArray = [];
-  const addProject = (project) => {
-    projectsArray.push(project);
-  };
-  const getProjects = () => projectsArray;
-
-  return { addProject, getProjects };
-})();
+import deleteIcon from "./icons";
 
 const projectDialog = document.querySelector("dialog.project");
 let selectedProjectDOMElement = null;
+const projectsUpdatedEvent = new Event('projectsUpdated');
 
 function selectProject(project) {
   if (selectedProjectDOMElement) {
     selectedProjectDOMElement.classList.toggle("selected");
   }
-  changeSelectedProject(project);
+  toggleSelectedProject(project);
   displayProjectCard(project);
   selectedProjectDOMElement = project.DOMElement;
   project.DOMElement.classList.toggle("selected");
+}
+
+function deselectProject(project) {
+  if(project.DOMElement !== selectedProjectDOMElement) return false;
+  selectedProjectDOMElement.classList.toggle("selected");
+  toggleSelectedProject(project);
+  displayProjectCard(null);
+  selectedProjectDOMElement = null;
+  return true;
+}
+
+function deleteClickHandler(project) {
+  if(isSelectedProject(project)) deselectProject(project);
+  projects.deleteProject(project);
+  document.dispatchEvent(projectsUpdatedEvent);
 }
 
 function displayProjects() {
@@ -46,11 +53,20 @@ function displayProjects() {
     name.textContent = project.name;
     projectElement.appendChild(name);
 
+    const deleteButton = document.createElement("button");
+    deleteButton.innerHTML = deleteIcon;
+    deleteButton.className = "editProjectButton";
+    deleteButton.addEventListener('click',(event) => {
+      event.stopPropagation(); // Prevents the containing div click event
+      deleteClickHandler(project)
+    });
+    projectElement.appendChild(deleteButton);
+
     container.appendChild(projectElement);
   });
 }
 
-function createForm() {
+function createForm(previousName="") {
   const form = document.createElement("form");
   form.method = "dialog";
   form.className = "project";
@@ -63,6 +79,7 @@ function createForm() {
   name.type = "text";
   name.placeholder = "Name";
   name.autofocus = true;
+  name.value = previousName;
   form.appendChild(name);
 
   return form;
@@ -86,7 +103,7 @@ function getProjectDialogForm() {
     if (nameInput.value !== "") {
       const project = new Project(nameInput.value);
       projects.addProject(project);
-      displayProjects(project);
+      document.dispatchEvent(projectsUpdatedEvent);
       selectProject(project);
     }
     projectDialog.close();
@@ -95,4 +112,4 @@ function getProjectDialogForm() {
 
 getProjectDialogForm();
 newProjectButton();
-displayProjects();
+document.addEventListener('projectsUpdated', displayProjects);
