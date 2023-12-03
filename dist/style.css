@@ -438,3 +438,9 @@ dialog.project input {
 form.project {
   display: none;
 }
+
+form.project > .alert {
+  /* display: none; */
+  background-color: red;
+  color: white;
+}

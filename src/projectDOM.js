@@ -76,39 +76,52 @@ function newProjectButton() {
   });
 }
 
+function formAlert(alert) {
+  const alertContainer = document.querySelector("form.project > .alert");
+  alertContainer.textContent = alert;
+  alertContainer.display = "block";
+}
+
+// TODO: fix alert apearance
 function validateProjectForm(name) {
   const regex = /^[a-zA-Z0-9\\(\\),\\/:._+ =!@#$%^&*'`~\\-]+$/;
   if(name === "") return false;
   if(name .length > 16){
-    alert("Name too long");
+    formAlert("Name too long");
     return false;
   }
   if(!regex.test(name)){
-    alert("Name can only contain English alphanumerics and (),/:._+ =!@#$%^&*'`~-");
+    formAlert("Name can only contain English alphanumerics and (),/:._+ =!@#$%^&*'`~-");
     return false;
   }
   return true;
 }
 
-// TODO: Change validation from html to js function
+// BUG: Enter makes two projects
 function getProjectDialogForm() { 
   const form = document.querySelector("form.project");
   form.style.display = "flex";
   const nameInput = form.querySelector('input[type="text"]');
 
-  function formSubmitHandler(event) {
-    event.preventDefault();
+  function formSubmitHandler() {
     if(validateProjectForm(nameInput.value)) {
       const project = new Project(nameInput.value);
       projects.addProject(project);
       project.DOMElement.addEventListener("click", () => selectProject(project));
       document.dispatchEvent(projectsUpdatedEvent);
       selectProject(project);
+      projectDialog.close();
     }
-    projectDialog.close();
+    if(nameInput.value === "") projectDialog.close();
   }
 
   nameInput.addEventListener("focusout", formSubmitHandler);
+  nameInput.addEventListener("keypress", (event) => {
+    if(event.key === 'Enter') {
+      event.preventDefault();
+      formSubmitHandler();
+    }
+  })
 }
 
 getProjectDialogForm();
