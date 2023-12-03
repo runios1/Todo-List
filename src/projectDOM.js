@@ -67,27 +67,6 @@ function displayProjects() {
   });
 }
 
-function createForm(previousName="") {
-  const form = document.createElement("form");
-  form.method = "dialog";
-  form.className = "project";
-
-  const colorPicker = document.createElement("button");
-  colorPicker.className = "colorPicker";
-  form.appendChild(colorPicker);
-
-  const name = document.createElement("input");
-  name.type = "text";
-  name.placeholder = "Name";
-  name.autofocus = true;
-  name.maxLength = "25";
-  name.pattern = /^[a-z0-9]+$/i;  // DOESN'T WORK!!
-  name.value = previousName;
-  form.appendChild(name);
-
-  return form;
-}
-
 function newProjectButton() {
   const addProjectButton = document.getElementById("addProjectButton");
   const nameInput = projectDialog.querySelector('input[type="text"]');
@@ -97,13 +76,29 @@ function newProjectButton() {
   });
 }
 
-function getProjectDialogForm() {
-  const container = projectDialog.querySelector(".formContainer");
-  const form = createForm();
-  container.appendChild(form);
+function validateProjectForm(name) {
+  const regex = /^[a-zA-Z0-9\\(\\),\\/:._+ =!@#$%^&*'`~\\-]+$/;
+  if(name === "") return false;
+  if(name .length > 16){
+    alert("Name too long");
+    return false;
+  }
+  if(!regex.test(name)){
+    alert("Name can only contain English alphanumerics and (),/:._+ =!@#$%^&*'`~-");
+    return false;
+  }
+  return true;
+}
+
+// TODO: Change validation from html to js function
+function getProjectDialogForm() { 
+  const form = document.querySelector("form.project");
+  form.style.display = "flex";
   const nameInput = form.querySelector('input[type="text"]');
-  form.addEventListener('submit', () => {
-    if (nameInput.value !== "") {
+
+  function formSubmitHandler(event) {
+    event.preventDefault();
+    if(validateProjectForm(nameInput.value)) {
       const project = new Project(nameInput.value);
       projects.addProject(project);
       project.DOMElement.addEventListener("click", () => selectProject(project));
@@ -111,8 +106,9 @@ function getProjectDialogForm() {
       selectProject(project);
     }
     projectDialog.close();
-  });
-  nameInput.addEventListener("focusout", form.submit);
+  }
+
+  nameInput.addEventListener("focusout", formSubmitHandler);
 }
 
 getProjectDialogForm();

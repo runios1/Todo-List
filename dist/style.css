@@ -434,3 +434,7 @@ dialog.project input {
 .editProjectButton:hover{
   background: rgba(0, 0, 0, 0.2);
 }
+
+form.project {
+  display: none;
+}

@@ -13,7 +13,12 @@
       <p class="sub-title">Projects</p>
       <div id="projects"></div>
       <dialog class="project" aria-label="Add new project">
-        <div class="project formContainer"></div>
+        <div class="project formContainer">
+          <form method="dialog" class="project">
+            <button class="colorPicker"></button>
+            <input type="text" placeholder="Name" autofocus maxlength="16">
+          </form>
+        </div>
       </dialog>
       <button id="addProjectButton" aria-label="Add project button">+</button>
     </nav>
