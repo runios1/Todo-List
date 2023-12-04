@@ -71,33 +71,33 @@ function newProjectButton() {
   const addProjectButton = document.getElementById("addProjectButton");
   const nameInput = projectDialog.querySelector('input[type="text"]');
   addProjectButton.addEventListener("click", () => {
+    const alert = document.querySelector(".formContainer.project > .alert");
+    alert.style.display = "none";
     projectDialog.show();
     nameInput.value = "";
   });
 }
 
 function formAlert(alert) {
-  const alertContainer = document.querySelector("form.project > .alert");
+  const alertContainer = document.querySelector(".formContainer.project > .alert");
   alertContainer.textContent = alert;
-  alertContainer.display = "block";
+  alertContainer.style.display = "block";
 }
 
-// TODO: fix alert apearance
 function validateProjectForm(name) {
-  const regex = /^[a-zA-Z0-9\\(\\),\\/:._+ =!@#$%^&*'`~\\-]+$/;
+  const regex = /^[a-zA-Z0-9\\(\\),\\/:._+ =!@#$%^&*'`~\\-\\?]+$/;
   if(name === "") return false;
-  if(name .length > 16){
-    formAlert("Name too long");
+  if(name.length > 16){
+    formAlert("Name is too long");
     return false;
   }
   if(!regex.test(name)){
-    formAlert("Name can only contain English alphanumerics and (),/:._+ =!@#$%^&*'`~-");
+    formAlert("Name can only contain English alphanumerics and punctuation");
     return false;
   }
   return true;
 }
 
-// BUG: Enter makes two projects
 function getProjectDialogForm() { 
   const form = document.querySelector("form.project");
   form.style.display = "flex";
@@ -119,7 +119,7 @@ function getProjectDialogForm() {
   nameInput.addEventListener("keypress", (event) => {
     if(event.key === 'Enter') {
       event.preventDefault();
-      formSubmitHandler();
+      nameInput.blur();
     }
   })
 }

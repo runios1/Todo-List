@@ -439,8 +439,13 @@ form.project {
   display: none;
 }
 
-form.project > .alert {
-  /* display: none; */
+.formContainer.project > .alert {
+  display: none;
   background-color: red;
   color: white;
+  font-size: 0.8rem;
+  width: 175px;
+  padding: 2px;
+  margin-top: 3px;
+  border-radius: 3px;
 }
