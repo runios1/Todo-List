@@ -288,6 +288,33 @@ main > div.card {
   width: 95%;
   align-self: center;
   overflow: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+#sortDiv {
+  margin-left: auto;
+  margin-right: 50px;
+  margin-top: 7px;
+  display: flex;
+}
+
+#sortDiv > button {
+  width: 17px;
+  border: none;
+  background: transparent;
+  padding: 0px;
+  cursor: pointer;
+  display: flex;
+}
+
+#sortDiv > select {
+  background: none;
+  border: none;
+  cursor: pointer;
+  /* remove arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 dialog.task button {

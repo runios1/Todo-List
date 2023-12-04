@@ -9,6 +9,7 @@ import {
 } from "date-fns";
 import newTaskSubmitHandler from "./taskFormDOM";
 import { deleteTaskFromSelectedProject } from "./selectedProject";
+import { sortIcon } from "./icons";
 
 function calculateTime(time) {
   const parsedTime = parseISO(time);
@@ -75,6 +76,39 @@ function displayTasks(project) {
   });
 }
 
+function makeSortSelect(main) {
+  const sortDiv = document.createElement("div");
+  sortDiv.id = "sortDiv";
+
+  const sortButton = document.createElement("button");
+  sortButton.innerHTML = sortIcon;
+  sortDiv.appendChild(sortButton);
+
+  const sortText = document.createElement("span");
+  sortText.textContent = "Sort by:";
+  sortDiv.appendChild(sortText);
+
+  const sortBy = document.createElement("select");
+
+  const defaultOption = document.createElement("option");
+  defaultOption.textContent = "Default";
+  defaultOption.value = "default";
+  defaultOption.defaultSelected = true;
+
+  const timeOption = document.createElement("option");
+  timeOption.textContent = "Time";
+  timeOption.value = "time";
+
+  const priorityOption = document.createElement("option");
+  priorityOption.textContent = "Priority";
+  priorityOption.value = "priority";
+
+  sortBy.append(defaultOption, timeOption, priorityOption);
+
+  sortDiv.appendChild(sortBy);
+  main.appendChild(sortDiv);
+}
+
 function displayProjectCard(project) {
   const main = document.querySelector("main > div.card");
   main.innerHTML = "";
@@ -93,6 +127,8 @@ function displayProjectCard(project) {
   const headerText = document.createElement("h3");
   headerText.textContent = project.name;
   header.appendChild(headerText);
+
+  makeSortSelect(main);
 
   const tasks = document.createElement("div");
   tasks.id = "task-list";
