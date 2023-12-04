@@ -19,10 +19,30 @@ function colorPickerClickHandler(event, project) {
   colorPicker.parentElement.insertBefore(colorContainer, colorPicker);
   colorPicker.remove();
 
-  colorButton("var(--colorPickerOption1)", colorPicker, colorContainer, project);
-  colorButton("var(--colorPickerOption2)", colorPicker, colorContainer, project);
-  colorButton("var(--colorPickerOption3)", colorPicker, colorContainer, project);
-  colorButton("var(--colorPickerOption4)", colorPicker, colorContainer, project);
+  colorButton(
+    "var(--colorPickerOption1)",
+    colorPicker,
+    colorContainer,
+    project,
+  );
+  colorButton(
+    "var(--colorPickerOption2)",
+    colorPicker,
+    colorContainer,
+    project,
+  );
+  colorButton(
+    "var(--colorPickerOption3)",
+    colorPicker,
+    colorContainer,
+    project,
+  );
+  colorButton(
+    "var(--colorPickerOption4)",
+    colorPicker,
+    colorContainer,
+    project,
+  );
 }
 
 export default colorPickerClickHandler;

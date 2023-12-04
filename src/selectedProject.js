@@ -2,7 +2,7 @@
 let selectedProject = null;
 
 function toggleSelectedProject(project) {
-  selectedProject = (project === selectedProject ? null : project);
+  selectedProject = project === selectedProject ? null : project;
 }
 
 function isSelectedProject(project) {

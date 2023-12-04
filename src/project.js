@@ -1,12 +1,12 @@
 class Project {
-  #name
+  #name;
 
-  #DOMElement
+  #DOMElement;
 
   constructor(name, color = "var(--colorPickerOption1)") {
     this.#name = name;
     this.color = color;
-    this.#DOMElement = document.createElement('button');
+    this.#DOMElement = document.createElement("button");
     this.tasks = [];
   }
 
@@ -23,8 +23,7 @@ class Project {
   }
 }
 
-
-const projects = (function() {
+const projects = (function () {
   const projectsArray = [];
   const addProject = (project) => {
     projectsArray.push(project);

@@ -32,7 +32,7 @@ function newTaskButton() {
   addTaskButton.addEventListener("click", () => {
     const form = taskDialog.querySelector("form");
     form.reset();
-    form.querySelector('button').textContent = "Submit";
+    form.querySelector("button").textContent = "Submit";
     form.addEventListener("submit", newTaskSubmitHandler);
     taskDialog.showModal();
   });

@@ -70,7 +70,7 @@ function displayProjectCard(project) {
   main.innerHTML = "";
   document.getElementById("addTaskButton").style.display = "block";
 
-  if(project === null) return;
+  if (project === null) return;
 
   const dialog = document.querySelector("dialog.task");
   dialog.addEventListener("close", () => displayTasks(project));
