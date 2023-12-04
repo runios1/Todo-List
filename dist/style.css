@@ -314,6 +314,7 @@ main > div.card {
   border: none;
   cursor: pointer;
   /* remove arrow */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
