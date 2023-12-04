@@ -297,11 +297,29 @@ dialog.task button {
   color: white;
 }
 
-dialog.task button[type="submit"] {
+#taskFormButtons button {
   width: 70px;
   height: 25px;
   align-self: center;
   font-weight: bold;
+}
+
+#taskFormButtons{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+#deleteTaskButton{
+  background-color: red;
+}
+
+#deleteTaskButton:hover{
+  background-color: rgb(194, 0, 0);
+}
+
+#deleteTaskButton:active{
+  background-color: darkred;
 }
 
 button#close {

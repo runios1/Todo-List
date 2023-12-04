@@ -32,7 +32,8 @@ function newTaskButton() {
   addTaskButton.addEventListener("click", () => {
     const form = taskDialog.querySelector("form");
     form.reset();
-    form.querySelector("button").textContent = "Submit";
+    form.querySelector("button[type='submit']").textContent = "Submit";
+    form.querySelector("#deleteTaskButton").style.display = "none";
     form.addEventListener("submit", newTaskSubmitHandler);
     taskDialog.showModal();
   });
@@ -87,7 +88,7 @@ function createForm() {
   const nameInput = form.querySelector("#name");
   nameInput.autofocus = true;
   nameInput.maxLength = "30";
-  nameInput.pattern = "^[a-zA-Z0-9\\(\\),\\/:._+ =!@#$%^&*'`~\\-]+$";
+  nameInput.pattern = "^[a-zA-Z0-9\\(\\),\\/:._+ =!@#$%^&*'`~\\-\\?]+$";
 
   const descriptionLabel = document.createElement("label");
   descriptionLabel.for = "description";
@@ -104,13 +105,25 @@ function createForm() {
   priority.max = maxPriority;
   priority.min = minPriority;
 
+  const buttons = document.createElement("div");
+  buttons.id = "taskFormButtons";
+  form.appendChild(buttons);
+
   const submit = document.createElement("button");
   submit.textContent = "Submit";
   submit.type = "submit";
   submit.className = "coloredButton";
-  submit.autofocus = true;
-  form.appendChild(submit);
+  buttons.appendChild(submit);
   formDOMElements.push(submit);
+
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.type = "button";
+  deleteButton.className = "coloredButton";
+  deleteButton.style.display = "none";
+  deleteButton.id = "deleteTaskButton";
+  buttons.appendChild(deleteButton);
+  formDOMElements.push(deleteButton);
 
   taskDialog.addEventListener("click", (event) => {
     dialogBackdropClickHandler(event, formDOMElements);

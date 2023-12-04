@@ -8,6 +8,7 @@ import {
   getDay,
 } from "date-fns";
 import newTaskSubmitHandler from "./taskFormDOM";
+import { deleteTaskFromSelectedProject } from "./selectedProject";
 
 function calculateTime(time) {
   const parsedTime = parseISO(time);
@@ -21,6 +22,7 @@ function calculateTime(time) {
 function taskClickHandler(task) {
   let properties = Object.getOwnPropertyNames(Object.getPrototypeOf(task));
   properties = properties.slice(1, properties.length);
+  const taskDialog = document.querySelector("dialog.task");
 
   function changeTaskSubmitHandler() {
     properties.forEach((property) => {
@@ -29,7 +31,11 @@ function taskClickHandler(task) {
     });
   }
 
-  const taskDialog = document.querySelector("dialog.task");
+  function deleteTaskHandler() {
+    deleteTaskFromSelectedProject(task);
+    taskDialog.close();
+  }
+
   properties.forEach((property) => {
     const input = document.getElementById(task[property].name);
     input.value = task[property].value;
@@ -37,11 +43,15 @@ function taskClickHandler(task) {
   const form = taskDialog.querySelector("form");
   const submit = taskDialog.querySelector('button[type="submit"]');
   submit.textContent = "Apply";
+  const deleteButton = taskDialog.querySelector("#deleteTaskButton");
+  deleteButton.style.display = "block";
   form.removeEventListener("submit", newTaskSubmitHandler);
   form.addEventListener("submit", changeTaskSubmitHandler);
-  taskDialog.addEventListener("close", () =>
-    form.removeEventListener("submit", changeTaskSubmitHandler),
-  );
+  taskDialog.addEventListener("close", () => {
+    form.removeEventListener("submit", changeTaskSubmitHandler);
+    deleteButton.removeEventListener("click", deleteTaskHandler);
+  });
+  deleteButton.addEventListener("click", deleteTaskHandler);
   taskDialog.showModal();
 }
 
