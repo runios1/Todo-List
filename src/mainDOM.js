@@ -5,7 +5,6 @@ import {
   isTomorrow,
   isThisWeek,
   parseISO,
-  getDay,
 } from "date-fns";
 import newTaskSubmitHandler from "./taskFormDOM";
 import { deleteTaskFromSelectedProject } from "./selectedProject";
@@ -16,7 +15,7 @@ function calculateTime(time) {
   if (isPast(parsedTime)) return "Overdue";
   if (isToday(parsedTime)) return format(parsedTime, "k:mm");
   if (isTomorrow(parsedTime)) return `${format(parsedTime, "k:mm")}, Tommorow`;
-  if (isThisWeek(parsedTime)) return getDay(parsedTime);
+  if (isThisWeek(parsedTime)) return format(parsedTime, "EEEE");
   return format(parsedTime, "MMM do, yyyy");
 }
 
@@ -56,10 +55,10 @@ function taskClickHandler(task) {
   taskDialog.showModal();
 }
 
-function displayTasks(project) {
+function displayTasks(taskList) {
   const tasks = document.getElementById("task-list");
   tasks.innerHTML = "";
-  project.tasks.forEach((task) => {
+  taskList.forEach((task) => {
     const taskDiv = document.createElement("button");
     taskDiv.addEventListener("click", () => taskClickHandler(task));
     tasks.appendChild(taskDiv);
@@ -76,7 +75,7 @@ function displayTasks(project) {
   });
 }
 
-function makeSortSelect(main) {
+function makeSortSelect(main, project) {
   const sortDiv = document.createElement("div");
   sortDiv.id = "sortDiv";
 
@@ -103,6 +102,14 @@ function makeSortSelect(main) {
   priorityOption.textContent = "Priority";
   priorityOption.value = "priority";
 
+  sortBy.addEventListener("change", (event) => {
+    displayTasks(project.getTasks(event.target.value));
+  });
+
+  sortButton.addEventListener("click", () => {
+    displayTasks(project.getTasks(sortBy.value).reverse());
+  });
+
   sortBy.append(defaultOption, timeOption, priorityOption);
 
   sortDiv.appendChild(sortBy);
@@ -117,7 +124,10 @@ function displayProjectCard(project) {
   if (project === null) return;
 
   const dialog = document.querySelector("dialog.task");
-  dialog.addEventListener("close", () => displayTasks(project));
+  dialog.addEventListener("close", () => {
+    displayTasks(project.getTasks("default"));
+    document.querySelector("#sortDiv > select").value = "default";
+  });
 
   const header = document.createElement("div");
   header.id = "card-header";
@@ -128,13 +138,14 @@ function displayProjectCard(project) {
   headerText.textContent = project.name;
   header.appendChild(headerText);
 
-  makeSortSelect(main);
+  makeSortSelect(main, project);
 
   const tasks = document.createElement("div");
   tasks.id = "task-list";
   main.appendChild(tasks);
 
-  displayTasks(project);
+  displayTasks(project.getTasks("default"));
+  document.querySelector("#sortDiv > select").value = "default";
 }
 
-export { displayProjectCard, displayTasks, taskClickHandler };
+export { displayProjectCard, taskClickHandler };

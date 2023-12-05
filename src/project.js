@@ -3,11 +3,13 @@ class Project {
 
   #DOMElement;
 
+  #tasks;
+
   constructor(name, color = "var(--colorPickerOption1)") {
     this.#name = name;
     this.color = color;
     this.#DOMElement = document.createElement("button");
-    this.tasks = [];
+    this.#tasks = [];
   }
 
   get name() {
@@ -18,14 +20,21 @@ class Project {
     return this.#DOMElement;
   }
 
+  getTasks(sort) {
+    if (sort === "default") return this.#tasks;
+    if (sort === "time")
+      return this.#tasks.toSorted((a, b) => a.time.value - b.time.value); // BUG: time value is string
+    return this.#tasks.toSorted((a, b) => a.priority.value - b.priority.value);
+  }
+
   addTask(task) {
-    this.tasks.push(task);
+    this.#tasks.push(task);
   }
 
   deleteTask(task) {
-    const index = this.tasks.indexOf(task);
+    const index = this.#tasks.indexOf(task);
     if (index > -1) {
-      this.tasks.splice(index, 1);
+      this.#tasks.splice(index, 1);
     }
   }
 }
