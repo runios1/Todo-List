@@ -23,7 +23,11 @@ class Project {
   getTasks(sort) {
     if (sort === "default") return this.#tasks;
     if (sort === "time")
-      return this.#tasks.toSorted((a, b) => a.time.value - b.time.value); // BUG: time value is string
+      return this.#tasks.toSorted((a, b) => {
+        console.log(a.time.value);
+        console.log(typeof a.time.value);
+        return a.time.value - b.time.value;
+      });
     return this.#tasks.toSorted((a, b) => a.priority.value - b.priority.value);
   }
 

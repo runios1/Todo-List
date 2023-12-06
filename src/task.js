@@ -1,3 +1,4 @@
+import { parseISO } from "date-fns";
 import TaskProperty from "./taskProperty";
 
 const minPriority = 1;
@@ -19,7 +20,7 @@ class Task {
     priorityVal = "",
   ) {
     this.#name = new TaskProperty("name", nameVal, "text");
-    this.#time = new TaskProperty("time", timeVal, "datetime-local");
+    this.#time = new TaskProperty("time", parseISO(timeVal), "datetime-local");
     this.#description = new TaskProperty("description", descriptionVal, "N/A");
     this.#priority = new TaskProperty("priority", priorityVal, "number");
   }
@@ -43,7 +44,7 @@ class Task {
    * @param {{ value: time; }} newTime
    */
   set time(newTime) {
-    this.#time.value = newTime;
+    this.#time.value = parseISO(newTime);
   }
 
   get description() {

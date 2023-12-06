@@ -1,22 +1,14 @@
-import {
-  format,
-  isPast,
-  isToday,
-  isTomorrow,
-  isThisWeek,
-  parseISO,
-} from "date-fns";
+import { format, isPast, isToday, isTomorrow, isThisWeek } from "date-fns";
 import newTaskSubmitHandler from "./taskFormDOM";
 import { deleteTaskFromSelectedProject } from "./selectedProject";
 import { sortIcon } from "./icons";
 
 function calculateTime(time) {
-  const parsedTime = parseISO(time);
-  if (isPast(parsedTime)) return "Overdue";
-  if (isToday(parsedTime)) return format(parsedTime, "k:mm");
-  if (isTomorrow(parsedTime)) return `${format(parsedTime, "k:mm")}, Tommorow`;
-  if (isThisWeek(parsedTime)) return format(parsedTime, "EEEE");
-  return format(parsedTime, "MMM do, yyyy");
+  if (isPast(time)) return "Overdue";
+  if (isToday(time)) return format(time, "k:mm");
+  if (isTomorrow(time)) return `${format(time, "k:mm")}, Tommorow`;
+  if (isThisWeek(time)) return format(time, "EEEE");
+  return format(time, "MMM do, yyyy");
 }
 
 function taskClickHandler(task) {
@@ -40,6 +32,11 @@ function taskClickHandler(task) {
     const input = document.getElementById(task[property].name);
     input.value = task[property].value;
   });
+  document.getElementById("time").value = format(
+    task.time.value,
+    "yyyy-MM-dd HH:mm",
+  );
+  console.log(format(task.time.value, "yyyy-MM-dd HH:mm"));
   const form = taskDialog.querySelector("form");
   const submit = taskDialog.querySelector('button[type="submit"]');
   submit.textContent = "Apply";
@@ -67,7 +64,7 @@ function displayTasks(taskList) {
     name.textContent = task.name.value;
     taskDiv.appendChild(name);
 
-    if (task.time.value !== "") {
+    if (!Number.isNaN(task.time.value.valueOf())) {
       const date = document.createElement("span");
       date.textContent = calculateTime(task.time.value);
       taskDiv.appendChild(date);
@@ -107,6 +104,7 @@ function makeSortSelect(main, project) {
   });
 
   sortButton.addEventListener("click", () => {
+    // FIXME: make it reversable so 2 clicks gets to the original sort again.
     displayTasks(project.getTasks(sortBy.value).reverse());
   });
 
