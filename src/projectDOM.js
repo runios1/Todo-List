@@ -1,7 +1,7 @@
 import { Project, projects } from "./project";
 import { toggleSelectedProject, isSelectedProject } from "./selectedProject";
 import colorPickerClickHandler from "./colorPickerDOM";
-import { displayProjectCard } from "./mainDOM";
+import displayProjectCard from "./mainDOM";
 import { deleteIcon } from "./icons";
 
 const projectDialog = document.querySelector("dialog.project");

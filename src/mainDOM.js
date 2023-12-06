@@ -32,11 +32,12 @@ function taskClickHandler(task) {
     const input = document.getElementById(task[property].name);
     input.value = task[property].value;
   });
-  document.getElementById("time").value = format(
-    task.time.value,
-    "yyyy-MM-dd HH:mm",
-  );
-  console.log(format(task.time.value, "yyyy-MM-dd HH:mm"));
+  if (!Number.isNaN(task.time.value.valueOf())) {
+    document.getElementById("time").value = format(
+      task.time.value,
+      "yyyy-MM-dd HH:mm",
+    );
+  }
   const form = taskDialog.querySelector("form");
   const submit = taskDialog.querySelector('button[type="submit"]');
   submit.textContent = "Apply";
@@ -73,6 +74,8 @@ function displayTasks(taskList) {
 }
 
 function makeSortSelect(main, project) {
+  let reversed = false;
+
   const sortDiv = document.createElement("div");
   sortDiv.id = "sortDiv";
 
@@ -104,8 +107,12 @@ function makeSortSelect(main, project) {
   });
 
   sortButton.addEventListener("click", () => {
-    // FIXME: make it reversable so 2 clicks gets to the original sort again.
-    displayTasks(project.getTasks(sortBy.value).reverse());
+    if (reversed) {
+      displayTasks(project.getSortedTasks());
+    } else {
+      displayTasks(project.getSortedTasks().reverse());
+    }
+    reversed = !reversed;
   });
 
   sortBy.append(defaultOption, timeOption, priorityOption);
@@ -123,8 +130,7 @@ function displayProjectCard(project) {
 
   const dialog = document.querySelector("dialog.task");
   dialog.addEventListener("close", () => {
-    displayTasks(project.getTasks("default"));
-    document.querySelector("#sortDiv > select").value = "default";
+    displayTasks(project.getSortedTasks());
   });
 
   const header = document.createElement("div");
@@ -142,8 +148,7 @@ function displayProjectCard(project) {
   tasks.id = "task-list";
   main.appendChild(tasks);
 
-  displayTasks(project.getTasks("default"));
-  document.querySelector("#sortDiv > select").value = "default";
+  displayTasks(project.getSortedTasks());
 }
 
-export { displayProjectCard, taskClickHandler };
+export default displayProjectCard;
