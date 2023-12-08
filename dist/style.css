@@ -240,6 +240,16 @@ button#close {
   margin-left: auto;
 }
 
+#today {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+
 /* Element Design */
 
 /* General */
@@ -450,11 +460,14 @@ dialog.project {
 }
 
 #projects > button:hover,
-#projects > button.selected {
+#projects > button.selected,
+#today.selected,
+#today:hover {
   background-color: darkgray;
 }
 
-#projects > button.selected:hover {
+#projects > button.selected:hover,
+#today.selected:hover {
   background-color: gray;
 }
 
@@ -495,4 +508,13 @@ form.project {
   padding: 2px;
   margin-top: 3px;
   border-radius: 3px;
+}
+
+#today > svg{
+  width: 20px;
+  margin-left: 5px;
+}
+
+#today > span {
+  margin-left: 5px;
 }

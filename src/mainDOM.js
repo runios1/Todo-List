@@ -2,6 +2,7 @@ import { format, isPast, isToday, isTomorrow, isThisWeek } from "date-fns";
 import newTaskSubmitHandler from "./taskFormDOM";
 import { deleteTaskFromSelectedProject } from "./selectedProject";
 import { sortIcon } from "./icons";
+import { projects } from "./project";
 
 function calculateTime(time) {
   if (isPast(time)) return "Overdue";
@@ -121,6 +122,7 @@ function makeSortSelect(main, project) {
   main.appendChild(sortDiv);
 }
 
+// TODO: make a modular version for project or today display
 function displayProjectCard(project) {
   const main = document.querySelector("main > div.card");
   main.innerHTML = "";
@@ -151,4 +153,37 @@ function displayProjectCard(project) {
   displayTasks(project.getSortedTasks());
 }
 
-export default displayProjectCard;
+// BUG: When closing an edit for a task it doesn't display
+// BUG: Delete doesn't work.
+function displayTodayCard() {
+  const main = document.querySelector("main > div.card");
+  main.innerHTML = "";
+
+  const header = document.createElement("div");
+  header.id = "card-header";
+  header.style.backgroundColor = "var(--teal)";
+  main.appendChild(header);
+
+  const headerText = document.createElement("h3");
+  headerText.textContent = "Today";
+  header.appendChild(headerText);
+
+  const tasks = document.createElement("div");
+  tasks.id = "task-list";
+  main.appendChild(tasks);
+
+  const taskList = [];
+  projects.getProjects().forEach((project) => {
+    project.getTasks("time").every((task) => {
+      if (isToday(task.time.value)) taskList.push(task);
+      else return false; // breaks
+      return true;
+    });
+  });
+
+  taskList.sort((a, b) => a.time.value - b.time.value);
+
+  displayTasks(taskList);
+}
+
+export { displayProjectCard, displayTodayCard };

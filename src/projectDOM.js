@@ -1,7 +1,11 @@
 import { Project, projects } from "./project";
-import { toggleSelectedProject, isSelectedProject } from "./selectedProject";
+import {
+  toggleSelectedProject,
+  isSelectedProject,
+  selectedProject,
+} from "./selectedProject";
 import colorPickerClickHandler from "./colorPickerDOM";
-import displayProjectCard from "./mainDOM";
+import { displayProjectCard, displayTodayCard } from "./mainDOM";
 import { deleteIcon } from "./icons";
 
 const projectDialog = document.querySelector("dialog.project");
@@ -12,6 +16,8 @@ function selectProject(project) {
   if (selectedProjectDOMElement) {
     selectedProjectDOMElement.classList.toggle("selected");
   }
+  document.getElementById("today").classList.remove("selected");
+
   toggleSelectedProject(project);
   displayProjectCard(project);
   selectedProjectDOMElement = project.DOMElement;
@@ -21,6 +27,7 @@ function selectProject(project) {
 function deselectProject(project) {
   if (project.DOMElement !== selectedProjectDOMElement) return false;
   selectedProjectDOMElement.classList.toggle("selected");
+
   toggleSelectedProject(project);
   displayProjectCard(null);
   selectedProjectDOMElement = null;
@@ -127,6 +134,18 @@ function getProjectDialogForm() {
   });
 }
 
+function displayToday(event) {
+  event.target.classList.add("selected");
+  if (selectedProject) deselectProject(selectedProject);
+  displayTodayCard();
+}
+
+function today() {
+  const todayButton = document.getElementById("today");
+  todayButton.addEventListener("click", displayToday);
+}
+
+today();
 getProjectDialogForm();
 newProjectButton();
 document.addEventListener("projectsUpdated", displayProjects);
