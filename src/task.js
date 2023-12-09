@@ -14,6 +14,7 @@ class Task {
   #priority;
 
   constructor(
+    project,
     nameVal = "",
     timeVal = "",
     descriptionVal = "",
@@ -23,6 +24,7 @@ class Task {
     this.#time = new TaskProperty("time", parseISO(timeVal), "datetime-local");
     this.#description = new TaskProperty("description", descriptionVal, "N/A");
     this.#priority = new TaskProperty("priority", priorityVal, "number");
+    this.project = new TaskProperty("", project, "N/A");
   }
 
   get name() {
@@ -66,16 +68,8 @@ class Task {
    * @param {{ value: number; }} newPriority
    */
   set priority(newPriority) {
-    // if (newPriority > maxPriority || newPriority < minPriority) {
-    //   alert('Invalid priority value');
-    // } else {
     this.#priority.value = newPriority;
-    // }
   }
 }
-
-// function validateTaskForm(time, description, priority) {
-
-// }
 
 export { Task, minPriority, maxPriority };

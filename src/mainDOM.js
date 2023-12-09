@@ -1,6 +1,5 @@
 import { format, isPast, isToday, isTomorrow, isThisWeek } from "date-fns";
 import newTaskSubmitHandler from "./taskFormDOM";
-import { deleteTaskFromSelectedProject } from "./selectedProject";
 import { sortIcon } from "./icons";
 import { projects } from "./project";
 
@@ -25,7 +24,7 @@ function taskClickHandler(task) {
   }
 
   function deleteTaskHandler() {
-    deleteTaskFromSelectedProject(task);
+    task.project.value.deleteTask(task);
     taskDialog.close();
   }
 
@@ -67,6 +66,7 @@ function displayTasks(taskList) {
     taskDiv.appendChild(name);
 
     if (!Number.isNaN(task.time.value.valueOf())) {
+      // If there is a date
       const date = document.createElement("span");
       date.textContent = calculateTime(task.time.value);
       taskDiv.appendChild(date);
@@ -150,11 +150,9 @@ function displayProjectCard(project) {
   tasks.id = "task-list";
   main.appendChild(tasks);
 
-  displayTasks(project.getSortedTasks());
+  displayTasks(project.getTasks("default"));
 }
 
-// BUG: When closing an edit for a task it doesn't display
-// BUG: Delete doesn't work.
 function displayTodayCard() {
   const main = document.querySelector("main > div.card");
   main.innerHTML = "";
@@ -175,8 +173,9 @@ function displayTodayCard() {
   const taskList = [];
   projects.getProjects().forEach((project) => {
     project.getTasks("time").every((task) => {
-      if (isToday(task.time.value)) taskList.push(task);
-      else return false; // breaks
+      if (isToday(task.time.value)) {
+        taskList.push(task);
+      } else return false; // breaks
       return true;
     });
   });

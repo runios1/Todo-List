@@ -9,13 +9,4 @@ function isSelectedProject(project) {
   return project === selectedProject;
 }
 
-function deleteTaskFromSelectedProject(task) {
-  selectedProject.deleteTask(task);
-}
-
-export {
-  toggleSelectedProject,
-  isSelectedProject,
-  deleteTaskFromSelectedProject,
-  selectedProject,
-};
+export { toggleSelectedProject, isSelectedProject, selectedProject };

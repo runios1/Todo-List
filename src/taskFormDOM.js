@@ -3,25 +3,20 @@ import { Task, maxPriority, minPriority } from "./task";
 
 const taskDialog = document.querySelector("dialog.task");
 
-function validateTaskForm() {
-  return true;
-}
-
 function noSelectedProjectHandler() {
   alert("No selected project");
 }
 
 function newTaskSubmitHandler() {
   if (selectedProject) {
-    if (validateTaskForm()) {
-      const newTask = new Task(
-        document.querySelector("#name").value,
-        document.querySelector("#time").value,
-        document.querySelector("#description").value,
-        document.querySelector("#priority").value,
-      );
-      selectedProject.addTask(newTask);
-    }
+    const newTask = new Task(
+      selectedProject,
+      document.querySelector("#name").value,
+      document.querySelector("#time").value,
+      document.querySelector("#description").value,
+      document.querySelector("#priority").value,
+    );
+    selectedProject.addTask(newTask);
   } else {
     noSelectedProjectHandler();
   }
