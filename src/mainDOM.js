@@ -119,10 +119,27 @@ function makeSortSelect(main, project) {
   sortBy.append(defaultOption, timeOption, priorityOption);
 
   sortDiv.appendChild(sortBy);
-  main.appendChild(sortDiv);
+  main.insertBefore(sortDiv, document.getElementById("task-list"));
 }
 
-// TODO: make a modular version for project or today display
+function displayCard(color, title, taskList) {
+  const main = document.querySelector("main > div.card");
+  const header = document.createElement("div");
+  header.id = "card-header";
+  header.style.backgroundColor = color;
+  main.appendChild(header);
+
+  const headerText = document.createElement("h3");
+  headerText.textContent = title;
+  header.appendChild(headerText);
+
+  const tasks = document.createElement("div");
+  tasks.id = "task-list";
+  main.appendChild(tasks);
+
+  displayTasks(taskList);
+}
+
 function displayProjectCard(project) {
   const main = document.querySelector("main > div.card");
   main.innerHTML = "";
@@ -135,40 +152,14 @@ function displayProjectCard(project) {
     displayTasks(project.getSortedTasks());
   });
 
-  const header = document.createElement("div");
-  header.id = "card-header";
-  header.style.backgroundColor = project.color;
-  main.appendChild(header);
-
-  const headerText = document.createElement("h3");
-  headerText.textContent = project.name;
-  header.appendChild(headerText);
+  displayCard(project.color, project.name, project.getTasks("default"));
 
   makeSortSelect(main, project);
-
-  const tasks = document.createElement("div");
-  tasks.id = "task-list";
-  main.appendChild(tasks);
-
-  displayTasks(project.getTasks("default"));
 }
 
 function displayTodayCard() {
   const main = document.querySelector("main > div.card");
   main.innerHTML = "";
-
-  const header = document.createElement("div");
-  header.id = "card-header";
-  header.style.backgroundColor = "var(--teal)";
-  main.appendChild(header);
-
-  const headerText = document.createElement("h3");
-  headerText.textContent = "Today";
-  header.appendChild(headerText);
-
-  const tasks = document.createElement("div");
-  tasks.id = "task-list";
-  main.appendChild(tasks);
 
   const taskList = [];
   projects.getProjects().forEach((project) => {
@@ -182,7 +173,7 @@ function displayTodayCard() {
 
   taskList.sort((a, b) => a.time.value - b.time.value);
 
-  displayTasks(taskList);
+  displayCard("var(--teal)", "Today", taskList);
 }
 
 export { displayProjectCard, displayTodayCard };
