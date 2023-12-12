@@ -145,7 +145,20 @@ function today() {
   todayButton.addEventListener("click", displayToday);
 }
 
+function getProjectsFromStorage() {
+  projects.getProjectArrayFromStorage();
+  document.dispatchEvent(projectsUpdatedEvent);
+  projects
+    .getProjects()
+    .forEach((project) =>
+      project.DOMElement.addEventListener("click", () =>
+        selectProject(project),
+      ),
+    );
+}
+
 today();
 getProjectDialogForm();
 newProjectButton();
 document.addEventListener("projectsUpdated", displayProjects);
+getProjectsFromStorage();
