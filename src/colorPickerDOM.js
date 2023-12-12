@@ -1,3 +1,5 @@
+import { projects } from "./project";
+
 function colorButton(color, colorPicker, colorContainer, project) {
   const domElement = document.createElement("button");
   domElement.className = "colorPicker";
@@ -7,6 +9,7 @@ function colorButton(color, colorPicker, colorContainer, project) {
     colorContainer.remove();
     colorPicker.style.backgroundColor = color;
     project.color = color;
+    projects.updateProjectsStorage();
   });
   colorContainer.appendChild(domElement);
 }

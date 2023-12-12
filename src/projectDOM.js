@@ -103,6 +103,10 @@ function validateProjectForm(name) {
     formAlert("Name can only contain English alphanumerics and punctuation");
     return false;
   }
+  if (projects.isNameDuplicate(name)) {
+    formAlert("Project names should be unique");
+    return false;
+  }
   return true;
 }
 

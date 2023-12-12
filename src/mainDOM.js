@@ -2,6 +2,7 @@ import { format, isPast, isToday, isTomorrow, isThisWeek } from "date-fns";
 import newTaskSubmitHandler from "./taskFormDOM";
 import { sortIcon } from "./icons";
 import { projects } from "./project";
+import { selectedProject } from "./selectedProject";
 
 function calculateTime(time) {
   if (isPast(time)) return "Overdue";
@@ -21,6 +22,7 @@ function taskClickHandler(task) {
       const input = document.getElementById(task[property].name);
       task[property] = input.value;
     });
+    selectedProject.updateTaskStorage();
   }
 
   function deleteTaskHandler() {

@@ -47,8 +47,7 @@ class Project {
     return this.getTasks(this.#sort);
   }
 
-  // FIXME: changes to the task are not saved
-  #updateTaskStorage() {
+  updateTaskStorage() {
     const tasksObjectArrayForStorage = [];
     this.#tasks.forEach((taskInstance) =>
       tasksObjectArrayForStorage.push({
@@ -63,23 +62,30 @@ class Project {
 
   addTask(task) {
     this.#tasks.push(task);
-    this.#updateTaskStorage();
+    this.updateTaskStorage();
   }
 
   deleteTask(task) {
     const index = this.#tasks.indexOf(task);
     if (index > -1) {
       this.#tasks.splice(index, 1);
-      this.#updateTaskStorage();
+      this.updateTaskStorage();
     }
   }
 }
 
 const projects = (function () {
   const projectsArray = [];
+
+  const updateProjectsStorage = () =>
+    localStorage.setItem("projects", JSON.stringify(projectsArray));
+
+  const isNameDuplicate = (name) =>
+    projectsArray.some((project) => project.name === name);
+
   const addProject = (project) => {
     projectsArray.push(project);
-    localStorage.setItem("projects", JSON.stringify(projectsArray)); // FIXME: doesn't resave when color changes
+    updateProjectsStorage();
   };
   const deleteProject = (project) => {
     const index = projectsArray.indexOf(project);
@@ -100,7 +106,14 @@ const projects = (function () {
     }
   };
 
-  return { addProject, deleteProject, getProjects, getProjectArrayFromStorage };
+  return {
+    addProject,
+    deleteProject,
+    getProjects,
+    getProjectArrayFromStorage,
+    updateProjectsStorage,
+    isNameDuplicate,
+  };
 })();
 
 export { Project, projects };
