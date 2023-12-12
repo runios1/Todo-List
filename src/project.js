@@ -57,7 +57,7 @@ class Project {
         priority: taskInstance.priority.value,
       }),
     );
-    localStorage.setItem(this.name, JSON.stringify(tasksObjectArrayForStorage)); // FIXME: name is not unique
+    localStorage.setItem(this.name, JSON.stringify(tasksObjectArrayForStorage));
   }
 
   addTask(task) {
