@@ -72,7 +72,7 @@ function createForm() {
   properties.forEach((property) => {
     if (task[property].inputType === "N/A") return;
     const label = document.createElement("label");
-    label.for = task[property].name;
+    label.setAttribute("for", task[property].name);
     label.textContent = `${capitalize(task[property].name)}: `;
     form.appendChild(label);
     const input = task[property].formQuery();
@@ -86,8 +86,8 @@ function createForm() {
   nameInput.pattern = "^[a-zA-Z0-9\\(\\),\\/:._+ =!@#$%^&*'`~\\-\\?]+$";
 
   const descriptionLabel = document.createElement("label");
-  descriptionLabel.for = "description";
-  descriptionLabel.textContent = "Description";
+  descriptionLabel.setAttribute("for", "description");
+  descriptionLabel.textContent = "Description"; // BUG: Labels' for attribute don't apply
   form.appendChild(descriptionLabel);
   const description = document.createElement("textarea");
   description.name = "description";
