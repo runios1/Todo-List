@@ -160,6 +160,7 @@ function displayProjectCard(project) {
 }
 
 function displayTodayCard() {
+  // BUG: Edit task in today results in error
   const main = document.querySelector("main > div.card");
   main.innerHTML = "";
 
