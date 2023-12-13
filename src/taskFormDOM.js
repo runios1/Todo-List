@@ -4,6 +4,7 @@ import { Task, maxPriority, minPriority } from "./task";
 const taskDialog = document.querySelector("dialog.task");
 
 function noSelectedProjectHandler() {
+  // eslint-disable-next-line no-alert
   alert("No selected project");
 }
 

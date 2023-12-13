@@ -39,7 +39,13 @@ class Project {
         (a, b) => a.priority.value - b.priority.value,
       );
     if (sort === "time")
-      return this.#tasks.toSorted((a, b) => a.time.value - b.time.value);
+      return this.#tasks.toSorted((a, b) => {
+        if (Number.isNaN(a.time.value.valueOf())) {
+          if (Number.isNaN(b.time.value.valueOf())) return 0;
+          return 1;
+        }
+        return a.time.value - b.time.value;
+      });
     return [...this.#tasks];
   }
 
@@ -74,7 +80,7 @@ class Project {
   }
 }
 
-const projects = (function () {
+const projects = (() => {
   const projectsArray = [];
 
   const updateProjectsStorage = () =>
