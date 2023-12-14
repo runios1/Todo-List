@@ -1,7 +1,7 @@
 import { format, isPast, isToday, isTomorrow, isThisWeek } from "date-fns";
-import newTaskSubmitHandler from "./taskFormDOM";
+import { changeFormToEditTask } from "./taskFormDOM";
 import { sortIcon } from "./icons";
-import { projects } from "./project";
+import getTodaysTasks from "./today";
 import { selectedProject } from "./selectedProject";
 
 function calculateTime(time) {
@@ -13,46 +13,8 @@ function calculateTime(time) {
 }
 
 function taskClickHandler(task) {
-  let properties = Object.getOwnPropertyNames(Object.getPrototypeOf(task));
-  properties = properties.slice(1, properties.length);
-  const taskDialog = document.querySelector("dialog.task");
-
-  function changeTaskSubmitHandler() {
-    properties.forEach((property) => {
-      const input = document.getElementById(task[property].name);
-      task[property] = input.value;
-    });
-    selectedProject.updateTaskStorage();
-  }
-
-  function deleteTaskHandler() {
-    task.project.value.deleteTask(task);
-    taskDialog.close();
-  }
-
-  properties.forEach((property) => {
-    const input = document.getElementById(task[property].name);
-    input.value = task[property].value;
-  });
-  if (!Number.isNaN(task.time.value.valueOf())) {
-    document.getElementById("time").value = format(
-      task.time.value,
-      "yyyy-MM-dd HH:mm",
-    );
-  }
-  const form = taskDialog.querySelector("form");
-  const submit = taskDialog.querySelector('button[type="submit"]');
-  submit.textContent = "Apply";
-  const deleteButton = taskDialog.querySelector("#deleteTaskButton");
-  deleteButton.style.display = "block";
-  form.removeEventListener("submit", newTaskSubmitHandler);
-  form.addEventListener("submit", changeTaskSubmitHandler);
-  taskDialog.addEventListener("close", () => {
-    form.removeEventListener("submit", changeTaskSubmitHandler);
-    deleteButton.removeEventListener("click", deleteTaskHandler);
-  });
-  deleteButton.addEventListener("click", deleteTaskHandler);
-  taskDialog.showModal();
+  changeFormToEditTask(task);
+  document.querySelector("dialog.task").showModal();
 }
 
 function displayTasks(taskList) {
@@ -149,10 +111,12 @@ function displayProjectCard(project) {
 
   if (project === null) return;
 
-  const dialog = document.querySelector("dialog.task");
-  dialog.addEventListener("close", () => {
-    displayTasks(project.getSortedTasks());
-  });
+  // const dialog = document.querySelector("dialog.task");
+  // dialog.addEventListener("close", () => {
+  //   // BUG: Every time I select a project I add another event listener such that when I close a dialog it refreshes the correct tasks. I never remove the event listeners
+  //   // Solution: New event handler that uses the selected project object instead.
+  //   displayTasks(project.getSortedTasks());
+  // });
 
   displayCard(project.color, project.name, project.getTasks("default"));
 
@@ -160,23 +124,20 @@ function displayProjectCard(project) {
 }
 
 function displayTodayCard() {
-  // BUG: Edit task in today results in error
   const main = document.querySelector("main > div.card");
   main.innerHTML = "";
 
-  const taskList = [];
-  projects.getProjects().forEach((project) => {
-    project.getTasks("time").every((task) => {
-      if (isToday(task.time.value)) {
-        taskList.push(task);
-      } else return false; // breaks
-      return true;
-    });
-  });
-
-  taskList.sort((a, b) => a.time.value - b.time.value);
+  const taskList = getTodaysTasks();
 
   displayCard("var(--teal)", "Today", taskList);
 }
+
+document.querySelector("dialog.task").addEventListener("close", () => {
+  if (selectedProject) {
+    displayTasks(selectedProject.getSortedTasks());
+  } else {
+    displayTasks(getTodaysTasks());
+  }
+});
 
 export { displayProjectCard, displayTodayCard };

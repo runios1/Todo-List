@@ -282,7 +282,7 @@ h2{
   font-size: 3rem;
 }
 
-/* FIXME: I don't like it; card header is cut at the top, card border is square at the bottom */
+/* FIXME: I don't like it; card header is cut at the top, card border is square at the bottom on chrome*/
 ::-webkit-scrollbar { 
   -webkit-appearance: none;
   width: 7px;

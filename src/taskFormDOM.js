@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { selectedProject } from "./selectedProject";
 import { Task, maxPriority, minPriority } from "./task";
 
@@ -135,7 +136,49 @@ function getTaskDialogForm() {
   container.appendChild(createForm());
 }
 
+// Changes the task dialog form to edit a task instead of creating a new task
+function changeFormToEditTask(task) {
+  let properties = Object.getOwnPropertyNames(Object.getPrototypeOf(task));
+  properties = properties.slice(1, properties.length);
+
+  function changeTaskSubmitHandler() {
+    properties.forEach((property) => {
+      const input = document.getElementById(task[property].name);
+      task[property] = input.value;
+    });
+    task.project.value.updateTaskStorage();
+  }
+
+  function deleteTaskHandler() {
+    task.project.value.deleteTask(task);
+    taskDialog.close();
+  }
+
+  properties.forEach((property) => {
+    const input = document.getElementById(task[property].name);
+    input.value = task[property].value;
+  });
+  if (!Number.isNaN(task.time.value.valueOf())) {
+    document.getElementById("time").value = format(
+      task.time.value,
+      "yyyy-MM-dd HH:mm",
+    );
+  }
+  const form = taskDialog.querySelector("form");
+  const submit = taskDialog.querySelector('button[type="submit"]');
+  submit.textContent = "Apply";
+  const deleteButton = taskDialog.querySelector("#deleteTaskButton");
+  deleteButton.style.display = "block";
+  form.removeEventListener("submit", newTaskSubmitHandler);
+  form.addEventListener("submit", changeTaskSubmitHandler);
+  taskDialog.addEventListener("close", () => {
+    form.removeEventListener("submit", changeTaskSubmitHandler);
+    deleteButton.removeEventListener("click", deleteTaskHandler);
+  });
+  deleteButton.addEventListener("click", deleteTaskHandler);
+}
+
 newTaskButton();
 getTaskDialogForm();
 
-export default newTaskSubmitHandler;
+export { newTaskSubmitHandler, changeFormToEditTask };
