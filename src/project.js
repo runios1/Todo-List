@@ -93,12 +93,15 @@ const projects = (() => {
     projectsArray.push(project);
     updateProjectsStorage();
   };
+
   const deleteProject = (project) => {
     const index = projectsArray.indexOf(project);
     if (index > -1) {
       projectsArray.splice(index, 1);
+      updateProjectsStorage();
     }
   };
+
   const getProjects = () => projectsArray;
 
   const getProjectArrayFromStorage = () => {
