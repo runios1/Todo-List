@@ -236,7 +236,7 @@ dialog.project {
 }
 
 #projects {
-  overflow: scroll;
+  overflow: auto;
 }
 
 form.project {
@@ -282,18 +282,6 @@ h2{
   font-size: 3rem;
 }
 
-/* FIXME: I don't like it; card header is cut at the top, card border is square at the bottom on chrome*/
-::-webkit-scrollbar { 
-  -webkit-appearance: none;
-  width: 7px;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: rgba(0, 0, 0, .5);
-  box-shadow: 0 0 1px rgba(255, 255, 255, .5);
-}
-
 /* main */
 
 main {
@@ -324,7 +312,7 @@ main > div.card {
   height: 90%;
   width: 95%;
   align-self: center;
-  overflow: scroll;
+  overflow: auto;
   display: flex;
   flex-direction: column;
 }

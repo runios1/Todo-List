@@ -89,7 +89,7 @@ function createForm() {
 
   const descriptionLabel = document.createElement("label");
   descriptionLabel.setAttribute("for", "description");
-  descriptionLabel.textContent = "Description"; // BUG: Labels' for attribute don't apply
+  descriptionLabel.textContent = "Description";
   form.appendChild(descriptionLabel);
   const description = document.createElement("textarea");
   description.name = "description";
